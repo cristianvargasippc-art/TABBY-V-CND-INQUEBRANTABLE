@@ -1,0 +1,2019 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CND INQUEBRANTABLE — Tabulación WSDC</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --o:#ea580c;--od:#c2410c;--odb:#7c2d12;--ol:#fed7aa;--op:#fff7ed;
+  --blk:#0a0400;--s1:#1a0800;--s2:#2d1100;--s3:#3d1a00;
+  --wh:#fff;--wh7:rgba(255,255,255,0.7);--wh4:rgba(255,255,255,0.4);--wh15:rgba(255,255,255,0.15);
+  --bdr:rgba(234,88,12,0.2);--bdr2:rgba(234,88,12,0.45);
+  --grn:#16a34a;--gnl:#dcfce7;--red:#dc2626;--rdl:#fee2e2;--blu:#1d4ed8;--bll:#dbeafe;
+  --pur:#7c3aed;--prl:#ede9fe;
+  --r:10px;--rl:16px;
+  --ff:'DM Sans',sans-serif;--fm:'DM Mono',monospace;--fd:'Bebas Neue',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff);background:var(--blk);color:var(--blk);font-size:14px;line-height:1.5;min-height:100vh;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-thumb{background:var(--o);border-radius:4px}
+
+/* ── TOPBAR ── */
+#topbar{
+  position:sticky;top:0;z-index:1000;
+  background:linear-gradient(90deg,#0a0400 0%,#1a0800 60%,#2d1100 100%);
+  border-bottom:2px solid var(--o);
+  box-shadow:0 2px 20px rgba(234,88,12,0.3);
+}
+.tbi{max-width:1200px;margin:0 auto;display:flex;align-items:center;padding:0 16px;height:56px;gap:0}
+.tb-logo{
+  display:flex;align-items:center;gap:10px;flex-shrink:0;margin-right:10px;
+  background:none;border:none;cursor:pointer;padding:6px 10px 6px 6px;
+  border-radius:8px;transition:background .2s;
+}
+.tb-logo:hover{background:rgba(234,88,12,.15)}
+.tb-logo-icon{font-size:26px;line-height:1;animation:flutter 4s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(234,88,12,.6))}
+@keyframes flutter{0%,100%{transform:rotate(-2deg) scale(1)}50%{transform:rotate(2deg) scale(1.1)}}
+.tb-logo-text{
+  font-family:var(--fd);font-size:19px;letter-spacing:3px;line-height:1;
+  background:linear-gradient(90deg,#fb923c,#ea580c,#fb923c);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.tb-logo-sub{font-size:8px;letter-spacing:1.5px;color:rgba(251,146,60,.6);display:block;margin-top:1px;font-family:var(--ff);-webkit-text-fill-color:rgba(251,146,60,.6)}
+.tb-nav{display:flex;align-items:center;gap:0;flex:1;overflow-x:auto;scrollbar-width:none}
+.tb-nav::-webkit-scrollbar{display:none}
+.tbn{padding:0 10px;height:56px;display:flex;align-items:center;color:var(--wh7);font-size:11.5px;font-weight:500;cursor:pointer;border:none;background:none;transition:all .2s;white-space:nowrap;position:relative;font-family:var(--ff)}
+.tbn:hover{color:#fff;background:rgba(234,88,12,.12)}
+.tbn.active{color:var(--o)}
+.tbn.active::after{content:'';position:absolute;bottom:0;left:10px;right:10px;height:2px;background:var(--o);border-radius:2px 2px 0 0}
+.tbn-drop{position:relative}
+.tbn-drop:hover .dm,.tbn-drop:focus-within .dm{display:block}
+.dm{display:none;position:absolute;top:100%;left:0;background:var(--s1);border:1px solid var(--bdr2);border-radius:var(--r);min-width:190px;z-index:200;padding:5px 0;box-shadow:0 12px 40px rgba(0,0,0,.7)}
+.di{display:block;padding:8px 14px;color:var(--wh7);font-size:12px;cursor:pointer;transition:all .15s;border:none;background:none;width:100%;text-align:left;font-family:var(--ff)}
+.di:hover{color:var(--o);background:rgba(234,88,12,.1)}
+.di.ds{color:rgba(255,255,255,.3);font-size:10px;letter-spacing:1px;padding:6px 14px 2px;cursor:default;text-transform:uppercase}
+.tb-auth{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
+.tba{padding:6px 13px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--ff);white-space:nowrap}
+.tba-ghost{background:transparent;border:1px solid rgba(234,88,12,.5);color:var(--wh7)}
+.tba-ghost:hover{border-color:var(--o);color:var(--o)}
+.tba-pill{background:var(--o);border:none;color:#fff}
+.tba-pill:hover{background:var(--od)}
+/* Hamburger */
+#hbg{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px;margin-left:8px;flex-shrink:0}
+#hbg span{display:block;width:22px;height:2px;background:var(--o);border-radius:2px;transition:all .3s}
+#mob-drawer{display:none;position:fixed;top:52px;left:0;right:0;bottom:0;z-index:999;background:rgba(10,4,0,.98);overflow-y:auto;padding:10px 0;-webkit-overflow-scrolling:touch}
+#mob-drawer.open{display:block}
+.mob-item{display:flex;align-items:center;padding:13px 20px;color:var(--wh7);font-size:13px;font-weight:500;border-bottom:1px solid rgba(234,88,12,.1);cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;width:100%;text-align:left;font-family:var(--ff);transition:all .2s}
+.mob-item:hover{color:var(--o);background:rgba(234,88,12,.06)}
+.mob-sec{font-family:var(--fd);font-size:10px;letter-spacing:2px;color:rgba(234,88,12,.45);padding:12px 20px 3px;text-transform:uppercase}
+.mob-auth{display:flex;gap:8px;padding:14px 20px;flex-wrap:wrap}
+
+/* ── HERO ── */
+#hero{background:linear-gradient(150deg,#3d1a00 0%,#7c2d12 20%,#c2410c 50%,#ea580c 75%,#f97316 90%,#fb923c 100%);position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='0.04'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+#hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to bottom,transparent,var(--blk));pointer-events:none}
+.hero-body{max-width:1200px;margin:0 auto;padding:44px 16px 70px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.bf{font-size:80px;line-height:1;animation:flutter 4s ease-in-out infinite;filter:drop-shadow(0 8px 32px rgba(0,0,0,.5))}
+.ht{font-family:var(--fd);font-size:clamp(34px,8vw,72px);letter-spacing:5px;color:#fff;line-height:.95;margin-top:10px;text-shadow:0 4px 30px rgba(0,0,0,.5)}
+.hs{font-family:var(--fd);font-size:clamp(16px,3.5vw,28px);letter-spacing:3px;color:rgba(255,255,255,.8);line-height:1}
+.hmeta{display:flex;gap:14px;margin-top:18px;flex-wrap:wrap;justify-content:center}
+.hpill{padding:5px 14px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.85)}
+.hlinks{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap;justify-content:center;padding:0 8px}
+.hl{padding:9px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--ff)}
+.hl-p{background:#fff;color:var(--od);border:none}
+.hl-p:hover{background:var(--op)}
+.hl-s{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.28);color:#fff}
+.hl-s:hover{background:rgba(0,0,0,.5)}
+/* Stat strip */
+.sstrip{background:rgba(0,0,0,.3);border-top:1px solid var(--wh15);border-bottom:1px solid var(--wh15);padding:14px 0;margin-bottom:20px}
+.sstrip-i{max-width:1200px;margin:0 auto;padding:0 16px;display:flex;justify-content:center;flex-wrap:wrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.sc{text-align:center;padding:6px 24px;border-right:1px solid var(--wh15)}
+.sc:last-child{border-right:none}
+.scn{font-family:var(--fd);font-size:34px;color:#fff;line-height:1}
+.scl{font-size:10px;color:var(--wh4);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+
+/* ── LAYOUT ── */
+.page{max-width:1200px;margin:0 auto;padding:0 16px 60px;width:100%}
+.page-sm{max-width:480px;margin:0 auto;padding:0 16px 60px}
+.page-md{max-width:760px;margin:0 auto;padding:0 16px 60px}
+.ph{padding:28px 0 18px;display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.ph-e{font-size:34px;line-height:1}
+.ph-t{font-family:var(--fd);font-size:clamp(26px,5vw,42px);letter-spacing:3px;color:#fff;line-height:.95}
+.ph-s{font-size:11px;color:var(--wh4);margin-top:3px;letter-spacing:1px}
+
+/* ── CARDS ── */
+.card{background:#fff;border-radius:var(--rl);padding:22px;margin-bottom:14px}
+.cd{background:var(--s1);border:1px solid var(--bdr);border-radius:var(--rl);padding:22px;margin-bottom:14px}
+.ct{font-family:var(--fd);font-size:19px;letter-spacing:2px;color:var(--o);margin-bottom:16px}
+.ctw{font-family:var(--fd);font-size:19px;letter-spacing:2px;color:#fff;margin-bottom:16px}
+.ctsm{font-family:var(--fd);font-size:14px;letter-spacing:1.5px;color:var(--o);margin-bottom:10px}
+
+/* ── TABLES ── */
+.tw{overflow-x:auto;border-radius:var(--r);border:1px solid var(--ol);-webkit-overflow-scrolling:touch}
+.tw table{min-width:520px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:var(--blk);color:var(--ol);padding:9px 11px;text-align:left;font-weight:600;font-size:11px;letter-spacing:1px;text-transform:uppercase}
+thead th:first-child{border-radius:var(--r) 0 0 0}
+thead th:last-child{border-radius:0 var(--r) 0 0}
+tbody td{padding:9px 11px;border-bottom:1px solid var(--ol);color:var(--blk);vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:var(--op)}
+.rk{width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:12px}
+.rk1{background:linear-gradient(135deg,#f59e0b,var(--o));color:#fff}
+.rk2{background:var(--od);color:#fff}
+.rk3{background:var(--odb);color:#fff}
+.rkn{background:#f3f4f6;color:#374151}
+td.num{font-family:var(--fm);font-weight:500;text-align:right}
+td.ctr{text-align:center}
+
+/* ── BADGES ── */
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.2px}
+.bo{background:var(--op);color:var(--od);border:1px solid var(--ol)}
+.bg{background:var(--gnl);color:#14532d;border:1px solid #86efac}
+.bb{background:var(--bll);color:#1e3a8a;border:1px solid #93c5fd}
+.br{background:var(--rdl);color:#7f1d1d;border:1px solid #fca5a5}
+.bk{background:var(--s1);color:var(--ol)}
+.bp{background:var(--prl);color:#4c1d95;border:1px solid #c4b5fd}
+.bbrk{background:linear-gradient(90deg,var(--od),var(--o));color:#fff;border:none}
+.byel{background:#fef3c7;color:#78350f;border:1px solid #fcd34d}
+/* Judge role badges */
+.b-chair{background:#0c4a6e;color:#bae6fd;border:none}
+.b-panel{background:#1e3a8a;color:#bfdbfe;border:none}
+.b-train{background:#4a1d96;color:#ddd6fe;border:none}
+/* Judge role circles */
+.role-circle{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:50%;
+  font-size:10px;font-weight:800;flex-shrink:0;line-height:1;
+}
+.rc-c{background:#0c4a6e;color:#bae6fd}
+.rc-p{background:#1e3a8a;color:#bfdbfe}
+.rc-t{background:#4a1d96;color:#ddd6fe}
+/* Judge chip in panel display */
+.judge-chip-display{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 9px 3px 4px;border-radius:20px;font-size:11px;font-weight:600;
+  margin:2px 2px 2px 0;
+}
+.jcd-chair{background:#e0f2fe;color:#0c4a6e;border:1px solid #bae6fd}
+.jcd-panel{background:#eff6ff;color:#1e3a8a;border:1px solid #bfdbfe}
+.jcd-train{background:#f5f3ff;color:#4a1d96;border:1px solid #ddd6fe}
+/* Prop/Opp team pills */
+.b-prop{background:#14532d;color:#bbf7d0;border:none}
+.b-opp{background:#450a0a;color:#fca5a5;border:none}
+/* Prop/Opp */
+.b-prop{background:#14532d;color:#bbf7d0;border:none}
+.b-opp{background:#450a0a;color:#fca5a5;border:none}
+
+/* ── STATUS PILLS ── */
+.rp{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.rp-pend{background:#f3f4f6;color:#6b7280}
+.rp-draw{background:var(--bll);color:#1e3a8a}
+.rp-pub{background:var(--op);color:var(--od)}
+.rp-act{background:linear-gradient(90deg,#f59e0b,var(--o));color:#fff}
+.rp-done{background:var(--gnl);color:#14532d}
+.rp-elim{background:var(--prl);color:#4c1d95}
+
+/* ── DEBATE ITEM ── */
+.di-card{background:var(--op);border:1px solid var(--ol);border-radius:var(--r);padding:13px;margin-bottom:8px}
+.di-card.editing{border-color:var(--o);border-width:2px;background:#fffbf7}
+.di-teams{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:7px}
+.di-team{padding:5px 11px;border-radius:6px;font-size:12px;font-weight:700}
+.di-prop{background:#14532d;color:#bbf7d0}
+.di-opp{background:#450a0a;color:#fca5a5}
+.di-vs{font-family:var(--fd);font-size:18px;color:var(--o);line-height:1}
+.di-meta{display:flex;gap:10px;font-size:11px;color:#9a3412;align-items:center;flex-wrap:wrap}
+.di-winner{background:#14532d;color:#bbf7d0;padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700}
+.di-pend{background:#f3f4f6;color:#6b7280;padding:3px 9px;border-radius:5px;font-size:11px}
+.di-judges{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+
+/* ── MOTION ── */
+.motion-card{background:var(--op);border-left:4px solid var(--o);border-radius:0 var(--r) var(--r) 0;padding:13px 15px;margin-bottom:10px}
+.mr{font-size:10px;color:var(--od);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
+.mt{font-size:14px;font-style:italic;color:var(--blk);font-weight:500;line-height:1.4;margin-bottom:8px}
+.mb-wrap{display:flex;align-items:center;gap:8px;font-size:11px}
+.mb{flex:1;height:7px;border-radius:4px;background:var(--ol);overflow:hidden}
+.mb-p{height:100%;background:linear-gradient(90deg,var(--o),var(--od))}
+.mb-o{height:100%;background:linear-gradient(90deg,#0c4a6e,#1e3a8a)}
+
+/* ── BREAK ── */
+.brk-item{background:#fff;border:1px solid var(--ol);border-radius:var(--r);padding:11px 14px;margin-bottom:5px;display:flex;align-items:center;gap:12px;transition:all .2s}
+.brk-item:hover{background:var(--op);transform:translateX(2px)}
+.brk-pos{font-family:var(--fd);font-size:22px;color:var(--o);min-width:30px}
+
+/* ── BRACKET ── */
+.bracket-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px}
+.bracket{display:flex;gap:20px;padding:12px 4px;min-width:700px}
+.bracket-col{display:flex;flex-direction:column;justify-content:space-around;gap:12px;min-width:180px}
+.bracket-col-title{font-family:var(--fd);font-size:13px;letter-spacing:1.5px;color:var(--o);margin-bottom:8px;text-align:center}
+.bracket-match{background:var(--op);border:1px solid var(--ol);border-radius:var(--r);padding:10px;position:relative}
+.bracket-match.winner-set{border-color:var(--o)}
+.bm-team{padding:5px 8px;border-radius:5px;font-size:12px;font-weight:600;margin-bottom:3px;display:flex;justify-content:space-between;align-items:center}
+.bm-team.bm-win{background:var(--od);color:#fff}
+.bm-team.bm-loss{background:#f3f4f6;color:#6b7280}
+.bm-team.bm-tbd{background:#f3f4f6;color:#9ca3af;font-style:italic}
+.bm-pts{font-size:10px;font-family:var(--fm);margin-left:6px}
+
+/* ── CHECK-IN ── */
+.ci-bar{height:10px;border-radius:5px;background:var(--ol);overflow:hidden;margin:8px 0}
+.ci-fill{height:100%;background:linear-gradient(90deg,var(--od),var(--o));transition:width .5s}
+.ci-row{display:flex;justify-content:space-between;align-items:center;padding:8px 11px;border-bottom:1px solid var(--ol);font-size:13px}
+.ci-row:last-child{border-bottom:none}
+.ci-chk{background:var(--grn);color:#fff;border:none;padding:4px 11px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--ff)}
+.ci-unchk{background:var(--red);color:#fff;border:none;padding:4px 11px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--ff)}
+
+/* ── FORMS ── */
+.fl{font-size:11px;font-weight:700;color:var(--odb);letter-spacing:.7px;text-transform:uppercase;margin-bottom:3px;display:block}
+input,select,textarea{width:100%;padding:9px 11px;border:1.5px solid var(--ol);border-radius:8px;font-size:13px;outline:none;background:#fff;color:var(--blk);font-family:var(--ff);transition:border-color .2s;margin-bottom:8px}
+input:focus,select:focus,textarea:focus{border-color:var(--o)}
+textarea{resize:vertical;min-height:70px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fg>*{margin-bottom:0!important}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.fg3>*{margin-bottom:0!important}
+.fg4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+.fg4>*{margin-bottom:0!important}
+/* Score input — compact */
+.score-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.score-lbl{font-size:12px;font-weight:600;color:var(--odb);min-width:70px}
+.score-in{width:65px!important;margin-bottom:0!important;text-align:center;font-family:var(--fm);font-weight:500}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:9px 15px;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--ff);letter-spacing:.2px;white-space:nowrap}
+.btn-full{width:100%;justify-content:center}
+.bo-btn{background:var(--o);color:#fff}
+.bo-btn:hover{background:var(--od)}
+.bdk-btn{background:var(--blk);color:var(--ol)}
+.bdk-btn:hover{background:#000}
+.bg-btn{background:var(--grn);color:#fff}
+.bg-btn:hover{background:#15803d}
+.br-btn{background:transparent;border:1.5px solid var(--o);color:var(--o)}
+.br-btn:hover{background:var(--o);color:#fff}
+.brd-btn{background:transparent;border:1.5px solid var(--red);color:var(--red)}
+.brd-btn:hover{background:var(--red);color:#fff}
+.bpur-btn{background:var(--pur);color:#fff}
+.bpur-btn:hover{background:#6d28d9}
+.bsm{padding:5px 10px;font-size:11px;border-radius:6px}
+.bxs{padding:3px 7px;font-size:10px;border-radius:5px}
+.bgrp{display:flex;gap:6px;flex-wrap:wrap}
+
+/* ── ALERTS ── */
+.alert{padding:10px 13px;border-radius:8px;font-size:13px;margin-bottom:12px;font-weight:500;line-height:1.4}
+.al-ok{background:var(--gnl);color:#14532d;border:1px solid #86efac}
+.al-err{background:var(--rdl);color:#7f1d1d;border:1px solid #fca5a5}
+.al-info{background:var(--bll);color:#1e3a8a;border:1px solid #93c5fd}
+.al-warn{background:#fef3c7;color:#78350f;border:1px solid #fcd34d}
+
+/* ── ADMIN NAV ── */
+.adm-nav{background:var(--blk);border:1px solid var(--bdr);border-radius:var(--rl);padding:9px;display:flex;gap:3px;flex-wrap:wrap;margin-bottom:14px}
+.an{padding:7px 11px;border-radius:7px;border:none;font-size:11px;font-weight:600;cursor:pointer;color:rgba(255,255,255,.4);background:transparent;transition:all .2s;font-family:var(--ff);letter-spacing:.3px;white-space:nowrap}
+.an:hover:not(.active){color:var(--ol)}
+.an.active{background:var(--o);color:#fff}
+
+/* ── SECTION TITLE ── */
+.sec{font-family:var(--fd);font-size:12px;letter-spacing:2px;color:var(--od);text-transform:uppercase;margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+.sec::after{content:'';flex:1;height:1px;background:var(--ol)}
+
+/* ── INNER TABS ── */
+.itabs{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap}
+.itab{padding:6px 13px;border:1.5px solid var(--ol);background:#fff;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;color:var(--od);transition:all .2s;font-family:var(--ff)}
+.itab:hover,.itab.active{background:var(--o);color:#fff;border-color:var(--o)}
+
+/* ── ADMIN STATS ── */
+.adm-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:9px;margin-bottom:18px}
+.as{background:var(--s1);border:1px solid var(--bdr);border-radius:var(--r);padding:13px;text-align:center}
+.as-n{font-family:var(--fd);font-size:34px;color:var(--o);line-height:1}
+.as-l{font-size:10px;color:var(--wh4);text-transform:uppercase;letter-spacing:1.5px;margin-top:3px}
+
+/* ── DRAW EDITOR ── */
+.draw-slot{
+  background:#fff;border:2px dashed var(--ol);border-radius:var(--r);
+  padding:10px;margin-bottom:6px;cursor:pointer;transition:all .2s;
+}
+.draw-slot:hover,.draw-slot.selected{border-color:var(--o);background:var(--op)}
+.draw-slot.drop-target{border-color:var(--grn);background:var(--gnl)}
+.slot-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#9a3412;margin-bottom:3px}
+.slot-team{font-weight:700;font-size:13px;color:var(--blk)}
+.slot-empty{color:#9ca3af;font-style:italic;font-size:12px}
+
+/* ── JUDGE PANEL BUILDER ── */
+.judge-panel-builder{background:var(--op);border:1px solid var(--ol);border-radius:var(--r);padding:12px;margin-bottom:8px}
+.jpb-title{font-size:12px;font-weight:700;color:var(--od);margin-bottom:8px}
+.jpb-roles{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.judge-chip{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;
+  transition:all .2s;border:none;font-family:var(--ff);
+}
+.jc-chair{background:#0c4a6e;color:#bae6fd}
+.jc-panel{background:#1e3a8a;color:#bfdbfe}
+.jc-train{background:#4a1d96;color:#ddd6fe}
+.jc-remove{background:#fee2e2;color:#7f1d1d}
+.jc-remove:hover{background:#dc2626;color:#fff}
+
+/* ── URL BOX ── */
+.url-box{background:var(--s2);border:1.5px dashed var(--o);border-radius:8px;padding:7px 11px;font-family:var(--fm);font-size:11px;color:var(--ol);word-break:break-all;margin:4px 0}
+.cpybtn{background:var(--o);color:#fff;border:none;padding:4px 9px;border-radius:5px;font-size:10px;font-weight:700;cursor:pointer;font-family:var(--ff);transition:background .2s}
+.cpybtn:hover{background:var(--od)}
+
+/* ── FEEDBACK ── */
+.fb-star{font-size:18px;cursor:pointer;transition:transform .1s;line-height:1;color:#d1d5db;user-select:none}
+.fb-star.on{color:var(--o)}
+.fb-star:hover{transform:scale(1.2)}
+.fb-cri{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--ol)}
+.fb-cri:last-of-type{border-bottom:none}
+.fb-cri-lbl{font-size:12px;font-weight:600;color:var(--odb)}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:24px;right:22px;background:var(--s1);color:var(--ol);padding:11px 17px;border-radius:var(--r);font-size:13px;font-weight:600;border:1px solid var(--bdr2);box-shadow:0 12px 40px rgba(0,0,0,.6);transform:translateY(120px);opacity:0;transition:all .3s;z-index:9999;max-width:300px}
+#toast.show{transform:translateY(0);opacity:1}
+
+/* ── LOGIN ── */
+.login-card{background:#fff;border-radius:var(--rl);padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.4);max-width:400px;margin:0 auto}
+.login-logo{text-align:center;margin-bottom:18px}
+.login-logo .lbf{font-size:44px;animation:flutter 3s ease-in-out infinite}
+.login-logo h1{font-family:var(--fd);font-size:22px;letter-spacing:2px;color:var(--o);margin-top:5px}
+.login-logo p{font-size:10px;color:#9a3412;letter-spacing:1px;margin-top:1px}
+
+/* ── PRIVATE DASH ── */
+.ph-header{background:var(--s1);border:1px solid var(--bdr2);border-radius:var(--rl);padding:18px;text-align:center;margin-bottom:13px}
+.ph-role{display:inline-block;background:var(--o);color:#fff;padding:3px 13px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.ph-name{font-family:var(--fd);font-size:22px;letter-spacing:2px;color:#fff}
+
+/* ── FOOTER ── */
+#footer{background:var(--s1);border-top:1px solid var(--bdr);padding:18px 16px;text-align:center;margin-top:auto}
+.ft-b{font-family:var(--fd);font-size:15px;letter-spacing:2px;color:var(--o);margin-bottom:3px}
+.ft-s{font-size:11px;color:var(--wh4);letter-spacing:1px}
+
+/* ── RESPONSIVE ── */
+
+/* Tablet & below: hide desktop nav, show hamburger */
+@media(max-width:900px){
+  .tb-nav,.tb-auth{display:none!important}
+  #hbg{display:flex}
+  .tbi{height:52px}
+  .tb-logo-text{font-size:17px}
+  #mob-drawer{top:52px}
+}
+
+/* Large tablet */
+@media(max-width:768px){
+  .page,.page-md{padding:0 12px 48px}
+  .page-sm{padding:0 12px 48px}
+  .card{padding:16px}
+  .cd{padding:16px}
+  .ph{padding:20px 0 14px;gap:10px}
+  .ph-e{font-size:28px}
+  .adm-stats{grid-template-columns:repeat(3,1fr)}
+  .adm-nav{flex-wrap:wrap;gap:3px;padding:7px}
+  .an{font-size:10.5px;padding:6px 9px}
+  .fg4{grid-template-columns:1fr 1fr}
+  .sstrip-i{overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start;gap:0}
+  .sc{flex-shrink:0;padding:6px 18px}
+  .bracket{min-width:600px}
+}
+
+/* Mobile landscape & small tablet */
+@media(max-width:600px){
+  .fg,.fg3,.fg4{grid-template-columns:1fr}
+  .fg3{grid-template-columns:1fr 1fr}
+  .hero-body{padding:32px 14px 56px}
+  .bf{font-size:64px}
+  .ht{letter-spacing:3px}
+  .hmeta{gap:8px}
+  .hpill{font-size:10px;padding:4px 10px;letter-spacing:.3px}
+  .hlinks{gap:7px}
+  .hl{font-size:12px;padding:7px 14px}
+  .sstrip{padding:10px 0}
+  .sc{padding:6px 14px}
+  .scn{font-size:28px}
+  .scl{font-size:9px;letter-spacing:1.5px}
+  .card{padding:13px}
+  .ct{font-size:17px}
+  .ctw{font-size:17px}
+  .adm-stats{grid-template-columns:1fr 1fr}
+  .adm-nav{gap:2px;padding:6px}
+  .an{font-size:10px;padding:5px 7px;letter-spacing:0}
+  .itabs{gap:3px}
+  .itab{font-size:10px;padding:5px 9px}
+  .bgrp{gap:4px}
+  .btn{font-size:12px;padding:7px 11px}
+  .bsm{font-size:10px;padding:4px 8px;border-radius:5px}
+  .bxs{font-size:9px;padding:3px 6px}
+  .di-card{padding:10px}
+  .di-team{font-size:11px;padding:4px 8px}
+  .di-vs{font-size:15px}
+  .di-meta{gap:7px;font-size:10px}
+  .di-judges{gap:3px}
+  .badge{font-size:10px;padding:2px 7px}
+  .tw{font-size:12px}
+  thead th{font-size:10px;padding:7px 8px}
+  tbody td{padding:7px 8px;font-size:12px}
+  .rk{width:24px;height:24px;font-size:11px}
+  .motion-card{padding:11px 12px}
+  .mt{font-size:13px}
+  .brk-item{padding:9px 11px}
+  .brk-pos{font-size:18px;min-width:26px}
+  .ci-row{padding:7px 10px;font-size:12px}
+  .score-row{gap:5px}
+  .score-lbl{font-size:11px;min-width:60px}
+  .score-in{width:55px!important;font-size:12px;padding:6px 4px}
+  .bracket-col{min-width:150px}
+  .bracket-col-title{font-size:11px}
+  .bm-team{font-size:11px;padding:4px 6px}
+  .url-box{font-size:10px;padding:6px 9px}
+  .login-card{padding:20px}
+  .ph-header{padding:14px}
+  .ph-name{font-size:18px}
+  .rp{font-size:9px;padding:2px 7px}
+  .sec{font-size:11px}
+}
+
+/* Phone portrait — tightest */
+@media(max-width:400px){
+  .tbi{padding:0 10px}
+  .tb-logo{gap:7px;padding:4px 8px 4px 4px}
+  .tb-logo-text{font-size:15px;letter-spacing:2px}
+  .tb-logo-sub{font-size:7px}
+  .ht{font-size:clamp(26px,9vw,52px);letter-spacing:2px}
+  .hs{font-size:clamp(13px,4vw,20px);letter-spacing:2px}
+  .bf{font-size:52px}
+  .fg3{grid-template-columns:1fr}
+  .adm-stats{grid-template-columns:1fr 1fr}
+  .an{font-size:9px;padding:4px 6px}
+  .page,.page-md,.page-sm{padding:0 10px 40px}
+  .card{padding:11px}
+  .ct{font-size:15px;margin-bottom:12px}
+  .itab{font-size:9px;padding:4px 8px}
+  .bsm{font-size:9px;padding:3px 7px}
+  .sc{padding:5px 10px}
+  .scn{font-size:24px}
+  .btn{font-size:11px;padding:6px 10px}
+  .di-teams{gap:5px}
+  .di-team{font-size:10px;padding:3px 7px}
+  .score-row{flex-wrap:wrap}
+  .score-in{width:50px!important}
+}
+</style>
+</head>
+<body>
+<div id="shell" style="min-height:100vh;display:flex;flex-direction:column">
+  <div id="topbar">
+    <div class="tbi">
+      <button class="tb-logo" onclick="nav('home');cMob()">
+        <span class="tb-logo-icon">🦋</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-start">
+          <span class="tb-logo-text">INQUEBRANTABLE</span>
+          <span class="tb-logo-sub">WSDC · SISTEMA DE TABULACIÓN</span>
+        </div>
+      </button>
+      <div class="tb-nav" id="tnav"></div>
+      <div class="tb-auth" id="tauth"></div>
+      <button id="hbg" onclick="tMob()" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div id="mob-drawer"><div id="mob-c"></div></div>
+  <div id="hero-zone"></div>
+  <div id="app-body" style="flex:1"></div>
+  <div id="footer">
+    <div class="ft-b">🦋 CND INQUEBRANTABLE · V CND</div>
+    <div class="ft-s">Sistema de Tabulación WSDC · Torneo Oficial · Formato Escuela Mundial</div>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+//  AUTH
+// ═══════════════════════════════════════════════════════════
+function chkA(u,p){return u.trim()==='admin'&&p.trim()==='doris2025'}
+
+// ═══════════════════════════════════════════════════════════
+//  DATA MODEL
+// ═══════════════════════════════════════════════════════════
+const BASE = 'https://cnd-inq.tab/';
+
+const D = {
+  view:'home', aTab:'dash', iTab:'r1',
+  role:null, token:null,
+  lU:'', lP:'', alert:null,
+  mobOpen:false,
+  drawEdit:null,   // debateId being edited in draw
+  swapSlot:null,   // team being swapped
+
+  tournament:{
+    name:'CND INQUEBRANTABLE',
+    subtitle:'V CND',
+    location:'Santo Domingo, Rep. Dominicana',
+    date:'2025', format:'WSDC', tabDir:'Equipo Inquebrantable',
+    currentRound:3, totalRounds:4,
+    breakSize:8, esl:true, novice:true,
+  },
+
+  teams:[
+    {id:'t1',name:'INA I',   full:'INQUEBRANTABLE I',   inst:'CND Inquebrantable',   region:'Nacional', cat:'open',  esl:false, nov:false, s1:'María García',   s2:'Carlos López',   s3:'Sofía Ramos',  wins:3,pts:0,spk:0,reply:0,token:'tk-INA1-x7k2',ci:true},
+    {id:'t2',name:'INA II',  full:'INQUEBRANTABLE II',  inst:'CND Inquebrantable',   region:'Nacional', cat:'open',  esl:false, nov:false, s1:'Ana Martínez',  s2:'Luis Torres',    s3:'Paula Soto',   wins:2,pts:0,spk:0,reply:0,token:'tk-INA2-m4p9',ci:true},
+    {id:'t3',name:'DMM I',   full:'DORIS MABEL I',      inst:'CND Doris Mabel Mora', region:'Nacional', cat:'open',  esl:false, nov:false, s1:'Sofía Ramírez', s2:'Pedro Jiménez',  s3:'Rosa Núñez',   wins:3,pts:0,spk:0,reply:0,token:'tk-DMM1-q8r3',ci:true},
+    {id:'t4',name:'DMM II',  full:'DORIS MABEL II',     inst:'CND Doris Mabel Mora', region:'Nacional', cat:'open',  esl:true,  nov:false, s1:'Valeria Cruz',  s2:'Andrés Vargas',  s3:'Mario Lara',   wins:2,pts:0,spk:0,reply:0,token:'tk-DMM2-w1s6',ci:false},
+    {id:'t5',name:'DMM III', full:'DORIS MABEL III',    inst:'CND Doris Mabel Mora', region:'Nacional', cat:'novice',esl:true,  nov:true,  s1:'Camila Reyes',  s2:'Diego Herrera',  s3:'Yara Melo',    wins:1,pts:0,spk:0,reply:0,token:'tk-DMM3-z5t8',ci:true},
+    {id:'t6',name:'CNV I',   full:'COLEGIO NUEVO I',    inst:'Colegio Nuevo',        region:'Oriental', cat:'novice',esl:false, nov:true,  s1:'Isabella Núñez',s2:'Sebastián Mora', s3:'Lea Peña',     wins:1,pts:0,spk:0,reply:0,token:'tk-CNV1-b2u4',ci:true},
+    {id:'t7',name:'CNV II',  full:'COLEGIO NUEVO II',   inst:'Colegio Nuevo',        region:'Oriental', cat:'novice',esl:true,  nov:true,  s1:'Fernanda Lora', s2:'Miguel Peña',    s3:'Teo Santos',   wins:0,pts:0,spk:0,reply:0,token:'tk-CNV2-a9v1',ci:false},
+    {id:'t8',name:'INV',     full:'INVITADOS A',        inst:'Club Invitado',        region:'Otro',     cat:'open',  esl:false, nov:false, s1:'Carmen Flores', s2:'Roberto Sáez',   s3:'Ariel Cruz',   wins:2,pts:0,spk:0,reply:0,token:'tk-INV1-c6w7',ci:true},
+  ],
+
+  adjudicators:[
+    {id:'j1',name:'Prof. Elena Vásquez',  inst:'CND Inquebrantable',   score:5,token:'jdg-EV-7x2k',avail:true,breaking:true, ci:true,  conflicts:[]},
+    {id:'j2',name:'Prof. Roberto Díaz',   inst:'CND Doris Mabel Mora', score:5,token:'jdg-RD-9m4p',avail:true,breaking:true, ci:true,  conflicts:[]},
+    {id:'j3',name:'Lic. Patricia Flores', inst:'Club Invitado',        score:3,token:'jdg-PF-3q8r',avail:true,breaking:false,ci:true,  conflicts:[]},
+    {id:'j4',name:'Dr. Marco Salinas',    inst:'CND Inquebrantable',   score:4,token:'jdg-MS-6k1w',avail:true,breaking:true, ci:false, conflicts:[]},
+    {id:'j5',name:'Lic. Laura Méndez',    inst:'CND Doris Mabel Mora', score:3,token:'jdg-LM-2n5r',avail:true,breaking:false,ci:true,  conflicts:[]},
+  ],
+
+  // rounds: each debate has { id, prop, opp, panel:{chair,panelists[],trainees[]}, room, winner, propScores:{s1,s2,s3,reply}, oppScores:{s1,s2,s3,reply}, split }
+  rounds:[
+    {id:'r1',name:'Ronda 1',seq:1,type:'prelim',status:'done',  published:true, fbOpen:false,
+     motion:'Esta Sala Cree Que los gobiernos deben prohibir las redes sociales para menores de 16 años.',
+     debates:[]},
+    {id:'r2',name:'Ronda 2',seq:2,type:'prelim',status:'done',  published:true, fbOpen:false,
+     motion:'Esta Sala Apoyaría el establecimiento de cuotas de género obligatorias en cargos políticos.',
+     debates:[]},
+    {id:'r3',name:'Ronda 3',seq:3,type:'prelim',status:'active',published:true, fbOpen:true,
+     motion:'Esta Sala Cree Que la pena capital es justificable en casos de crímenes de extrema gravedad.',
+     debates:[]},
+    {id:'r4',name:'Ronda 4',seq:4,type:'prelim',status:'pending',published:false,fbOpen:false,motion:'',debates:[]},
+    {id:'r5',name:'Octavos de Final',seq:5,type:'octofinal',status:'pending',published:false,fbOpen:false,motion:'',debates:[]},
+    {id:'r6',name:'Cuartos de Final',seq:6,type:'quarterfinal',status:'pending',published:false,fbOpen:false,motion:'',debates:[]},
+    {id:'r7',name:'Semifinal',       seq:7,type:'semifinal',   status:'pending',published:false,fbOpen:false,motion:'',debates:[]},
+    {id:'r8',name:'Gran Final',      seq:8,type:'final',       status:'pending',published:false,fbOpen:false,motion:'',debates:[]},
+  ],
+  institutions:[
+    {id:'i1',name:'CND Inquebrantable',   teams:['t1','t2'],adjs:['j1','j4']},
+    {id:'i2',name:'CND Doris Mabel Mora', teams:['t3','t4','t5'],adjs:['j2','j5']},
+    {id:'i3',name:'Colegio Nuevo',        teams:['t6','t7'],adjs:[]},
+    {id:'i4',name:'Club Invitado',        teams:['t8'],adjs:['j3']},
+  ],
+  feedbacks:{},
+  scoreCache:{},  // teamId → accumulated speaker scores
+};
+
+// Seed demo debates
+(function(){
+  function deb(id,p,o,j,room,winProp,pS,oS){
+    const ps={s1:pS[0],s2:pS[1],s3:pS[2],reply:pS[3]};
+    const os={s1:oS[0],s2:oS[1],s3:oS[2],reply:oS[3]};
+    return{id,prop:p,opp:o,panel:{chair:j,panelists:[],trainees:[]},room,
+      winner:winProp?p:o,propScores:ps,oppScores:os,split:false};
+  }
+  D.rounds[0].debates=[
+    deb('d1','t1','t3','j1','Sala A',false,[74,76,75,18],[80,79,78,21]),
+    deb('d2','t2','t8','j2','Sala B',true, [73,72,74,17],[70,71,70,16]),
+    deb('d3','t4','t5','j3','Sala C',true, [75,76,74,18],[65,66,63,15]),
+    deb('d4','t6','t7','j5','Sala D',true, [68,67,66,16],[60,61,59,14]),
+  ];
+  D.rounds[1].debates=[
+    deb('d5','t3','t2','j4','Sala A',true, [82,79,80,20],[74,72,73,18]),
+    deb('d6','t1','t8','j2','Sala B',true, [77,78,76,19],[73,72,71,17]),
+    deb('d7','t4','t6','j1','Sala C',true, [76,74,75,18],[69,66,67,17]),
+    deb('d8','t5','t7','j3','Sala D',true, [67,65,66,16],[61,61,60,14]),
+  ];
+  D.rounds[2].debates=[
+    {id:'d9', prop:'t1',opp:'t2',panel:{chair:'j1',panelists:['j3'],trainees:['j5']},room:'Sala A',winner:null,propScores:{},oppScores:{},split:false},
+    {id:'d10',prop:'t3',opp:'t4',panel:{chair:'j2',panelists:['j4'],trainees:[]},    room:'Sala B',winner:null,propScores:{},oppScores:{},split:false},
+    {id:'d11',prop:'t8',opp:'t5',panel:{chair:'j4',panelists:[],    trainees:['j3']},room:'Sala C',winner:null,propScores:{},oppScores:{},split:false},
+    {id:'d12',prop:'t6',opp:'t7',panel:{chair:'j5',panelists:[],    trainees:[]},    room:'Sala D',winner:null,propScores:{},oppScores:{},split:false},
+  ];
+  // calc pts from seeded scores
+  D.rounds.forEach(r=>r.debates.forEach(d=>{
+    if(!d.winner)return;
+    const pt=getTeam(d.prop),op=getTeam(d.opp);
+    if(!pt||!op)return;
+    if(d.propScores.s1){
+      const ps=d.propScores,os=d.oppScores;
+      const ptot=ps.s1+ps.s2+ps.s3+ps.reply;
+      const otot=os.s1+os.s2+os.s3+os.reply;
+      pt.spk+=ps.s1+ps.s2+ps.s3;pt.reply+=ps.reply;pt.pts+=ptot;
+      op.spk+=os.s1+os.s2+os.s3;op.reply+=os.reply;op.pts+=otot;
+      if(d.winner===d.prop)pt.wins+=1; else op.wins+=1;
+    }
+  }));
+})();
+
+// ═══════════════════════════════════════════════════════════
+//  UTILS
+// ═══════════════════════════════════════════════════════════
+function gid(){return 'x'+Math.random().toString(36).substr(2,9)}
+function gtok(p='tk'){return p+'-'+Math.random().toString(36).substr(2,8)}
+function tnow(){return new Date().toLocaleString('es-DO',{dateStyle:'short',timeStyle:'short'})}
+function toast(m,d=2800){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),d)}
+function cpy(txt){try{navigator.clipboard.writeText(txt)}catch(e){};toast('📋 Copiado!')}
+function getTeam(id){return D.teams.find(t=>t.id===id)}
+function getAdj(id){return D.adjudicators.find(a=>a.id===id)}
+function getRound(id){return D.rounds.find(r=>r.id===id)}
+function tn(id){const t=getTeam(id);return t?t.name:'—'}
+function tfn(id){const t=getTeam(id);return t?t.full:'—'}
+function an(id){const a=getAdj(id);return a?a.name:'Sin asignar'}
+function v(id){const e=document.getElementById(id);return e?e.value.trim():''}
+function sv(id,val){const e=document.getElementById(id);if(e)e.value=val}
+function ni(id){return parseInt(v(id))||0}
+function starsH(n,m=5){let s='';for(let i=1;i<=m;i++)s+=`<span style="color:${i<=n?'#ea580c':'#d1d5db'}">${i<=n?'★':'☆'}</span>`;return s}
+function pct(a,b){return (a+b)===0?50:Math.round(a/(a+b)*100)}
+function teamTot(d,side){const s=side==='prop'?d.propScores:d.oppScores;if(!s||!s.s1)return 0;return(s.s1||0)+(s.s2||0)+(s.s3||0)+(s.reply||0)}
+function hasFB(dId,tok,tgt){return(D.feedbacks[dId]||[]).some(f=>f.from===tok&&f.targetId===tgt)}
+function ciCount(){return D.teams.filter(t=>t.ci).length+D.adjudicators.filter(a=>a.ci).length}
+function totalPpl(){return D.teams.length+D.adjudicators.length}
+function tDebates(){return D.rounds.reduce((s,r)=>s+r.debates.length,0)}
+function getPartByToken(tok){
+  const a=D.adjudicators.find(x=>x.token===tok);if(a)return{type:'juez',data:a};
+  const t=D.teams.find(x=>x.token===tok);if(t)return{type:'equipo',data:t};
+  return null;
+}
+function getSpeakers(){
+  const spk={};
+  D.rounds.forEach(r=>r.debates.forEach(d=>{
+    if(!d.winner)return;
+    const pt=getTeam(d.prop),op=getTeam(d.opp);
+    if(!pt||!op||!d.propScores.s1)return;
+    [[pt,'prop'],[op,'opp']].forEach(([t,side])=>{
+      const sc=side==='prop'?d.propScores:d.oppScores;
+      [[t.s1,'s1'],[t.s2,'s2'],[t.s3,'s3']].forEach(([nm,k])=>{
+        if(!spk[nm])spk[nm]={name:nm,team:t.name,inst:t.inst,pts:0,rounds:0};
+        spk[nm].pts+=(sc[k]||0);spk[nm].rounds++;
+      });
+    });
+  }));
+  return Object.values(spk).sort((a,b)=>b.pts-a.pts);
+}
+function getReplies(){
+  const rep={};
+  D.rounds.forEach(r=>r.debates.forEach(d=>{
+    if(!d.winner||!d.propScores.s1)return;
+    [[getTeam(d.prop),d.propScores],[getTeam(d.opp),d.oppScores]].forEach(([t,s])=>{
+      if(!t||!s.reply)return;
+      if(!rep[t.s1])rep[t.s1]={name:t.s1,team:t.name,inst:t.inst,pts:0,rounds:0};
+      rep[t.s1].pts+=s.reply;rep[t.s1].rounds++;
+    });
+  }));
+  return Object.values(rep).sort((a,b)=>b.pts-a.pts);
+}
+function getBreakTeams(){
+  const s=[...D.teams].sort((a,b)=>b.wins-a.wins||b.pts-a.pts);
+  const b=s.filter(t=>t.wins>=2);
+  return(b.length>=2?b:s).slice(0,D.tournament.breakSize);
+}
+function getBreakAdjs(){return D.adjudicators.filter(a=>a.breaking).sort((a,b)=>b.score-a.score)}
+function judgePanel(d){
+  const chair=getAdj(d.panel.chair);
+  const panelists=(d.panel.panelists||[]).map(id=>getAdj(id)).filter(Boolean);
+  const trainees=(d.panel.trainees||[]).map(id=>getAdj(id)).filter(Boolean);
+  return{chair,panelists,trainees};
+}
+function judgePanelHtml(d){
+  var p = judgePanel(d);
+  var out = '';
+  if(p.chair){
+    out += '<span class="judge-chip-display jcd-chair">'
+         + '<span class="role-circle rc-c">C</span>'
+         + 'Chair: ' + p.chair.name
+         + '</span>';
+  }
+  p.panelists.forEach(function(a){
+    out += '<span class="judge-chip-display jcd-panel">'
+         + '<span class="role-circle rc-p">P</span>'
+         + 'Panelista: ' + a.name
+         + '</span>';
+  });
+  p.trainees.forEach(function(a){
+    out += '<span class="judge-chip-display jcd-train">'
+         + '<span class="role-circle rc-t">T</span>'
+         + 'Trainee: ' + a.name
+         + '</span>';
+  });
+  return out || '<span style="font-size:11px;color:#9a3412;font-style:italic">Sin panel asignado</span>';
+}
+function doneRounds(){return D.rounds.filter(r=>r.status==='done')}
+
+// ═══════════════════════════════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════════════════════════════
+function nav(v2){
+  D.view = v2;
+  D.alert = null;
+  D.drawEdit = null;
+  D.swapSlot = null;
+  // For results: pick a valid round
+  if(v2==='round-results'){
+    var rel = D.role==='admin' ? D.rounds : D.rounds.filter(function(r){return r.published;});
+    if(!rel.length) rel = D.rounds; // fallback: show all
+    var found = rel.find(function(r){return r.id===D.iTab;});
+    if(!found) D.iTab = rel[0].id;
+  }
+  // For break: reset to consistent state
+  if(v2==='break-open'||v2==='break-esl'||v2==='break-nov'||v2==='break-adjs') D.iTab = v2;
+  try{ render(); }catch(e){ console.error('render error',e); }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function navR(id){ D.iTab=id; nav('round-results'); }
+function logout(){D.role=null;D.token=null;nav('home')}
+function tMob(){
+  D.mobOpen=!D.mobOpen;
+  const dr=document.getElementById('mob-drawer');
+  const hb=document.getElementById('hbg');
+  if(dr){dr.classList.toggle('open',D.mobOpen)}
+  if(hb){
+    const sp=hb.querySelectorAll('span');
+    sp[0].style.transform=D.mobOpen?'rotate(45deg) translate(5px,5px)':'';
+    sp[1].style.opacity=D.mobOpen?'0':'1';
+    sp[2].style.transform=D.mobOpen?'rotate(-45deg) translate(5px,-5px)':'';
+  }
+  if(D.mobOpen)buildMob();
+}
+function cMob(){D.mobOpen=false;const dr=document.getElementById('mob-drawer');if(dr)dr.classList.remove('open');const hb=document.getElementById('hbg');if(hb){hb.querySelectorAll('span').forEach(s=>{s.style.transform='';s.style.opacity='1';})}}
+function mnav(v2){cMob();nav(v2)}
+function buildMob(){
+  const mc=document.getElementById('mob-c');if(!mc)return;
+  const rel=D.rounds.filter(r=>r.published||D.role==='admin');
+  mc.innerHTML=`
+    <div class="mob-auth">
+      ${D.role==='admin'?`<button class="btn bo-btn bsm" onclick="mnav('admin')">⚙ Admin</button><button class="btn br-btn bsm" onclick="logout();cMob()">Salir</button>`
+      :D.role==='participant'?`<button class="btn bo-btn bsm" onclick="mnav('private')">Mi Panel</button><button class="btn br-btn bsm" onclick="logout();cMob()">Salir</button>`
+      :`<button class="btn bo-btn bsm" onclick="mnav('login')">🔐 Iniciar Sesión</button>`}
+    </div>
+    <div class="mob-sec">Tab & Resultados</div>
+    <button class="mob-item" onclick="mnav('team-tab')">👯 Tab de Equipos</button>
+    <button class="mob-item" onclick="mnav('speaker-tab')">🎤 Tab de Oradores</button>
+    <button class="mob-item" onclick="mnav('replies-tab')">💬 Réplicas</button>
+    <div class="mob-sec">Rondas</div>
+    ${rel.map(r=>`<button class="mob-item" onclick="D.iTab='${r.id}';mnav('round-results')">📋 ${r.name}</button>`).join('')}
+    <div class="mob-sec">Torneo</div>
+    <button class="mob-item" onclick="mnav('motions')">📜 Mociones</button>
+    <button class="mob-item" onclick="mnav('checkin')">✅ Check-In</button>
+    <button class="mob-item" onclick="mnav('break-open')">🏆 Break</button>
+    <button class="mob-item" onclick="mnav('bracket')">🗂 Eliminatorias</button>
+    <button class="mob-item" onclick="mnav('participants')">👤 Participantes</button>
+    <button class="mob-item" onclick="mnav('institutions')">🏛 Instituciones</button>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  RENDER NAV BAR
+// ═══════════════════════════════════════════════════════════
+function renderNav(){
+  const rel=D.rounds.filter(r=>r.published||D.role==='admin');
+  const tn2=document.getElementById('tnav');
+  const ta=document.getElementById('tauth');
+  if(!tn2||!ta)return;
+  tn2.innerHTML=`
+    <button class="tbn ${D.view==='team-tab'?'active':''}" onclick="nav('team-tab')">Tab Equipos</button>
+    <button class="tbn ${D.view==='speaker-tab'?'active':''}" onclick="nav('speaker-tab')">Tab Oradores</button>
+    <button class="tbn ${D.view==='replies-tab'?'active':''}" onclick="nav('replies-tab')">Réplicas</button>
+    <button class="tbn ${D.view==='motions'?'active':''}" onclick="nav('motions')">Mociones</button>
+    <button class="tbn ${D.view==='checkin'?'active':''}" onclick="nav('checkin')">Check-In</button>
+    <div class="tbn-drop">
+      <button class="tbn ${D.view==='round-results'?'active':''}">Resultados ▾</button>
+      <div class="dm">
+        ${rel.map(r=>`<button class="di" onclick="navR('${r.id}')">${r.name}</button>`).join('')||'<span class="di ds">Sin rondas publicadas</span>'}
+      </div>
+    </div>
+    <div class="tbn-drop">
+      <button class="tbn ${D.view.startsWith('break')?'active':''}">Break ▾</button>
+      <div class="dm">
+        <span class="di ds">Equipos</span>
+        <button class="di" onclick="nav('break-open')">Abierto</button>
+        <button class="di" onclick="nav('break-esl')">ESL</button>
+        <button class="di" onclick="nav('break-nov')">Novatos</button>
+        <span class="di ds">Jueces</span>
+        <button class="di" onclick="nav('break-adjs')">Jueces con Break</button>
+      </div>
+    </div>
+    <button class="tbn ${D.view==='bracket'?'active':''}" onclick="nav('bracket')">Eliminatorias</button>
+    <button class="tbn ${D.view==='participants'?'active':''}" onclick="nav('participants')">Participantes</button>
+    <button class="tbn ${D.view==='institutions'?'active':''}" onclick="nav('institutions')">Instituciones</button>`;
+  ta.innerHTML=D.role==='admin'
+    ?`<button class="tba tba-pill" onclick="nav('admin')">⚙ Admin</button><button class="tba tba-ghost" onclick="logout()">Salir</button>`
+    :D.role==='participant'
+    ?`<button class="tba tba-pill" onclick="nav('private')">Mi Panel</button><button class="tba tba-ghost" onclick="logout()">Salir</button>`
+    :`<button class="tba tba-ghost" onclick="nav('login')">Iniciar Sesión</button>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  HERO
+// ═══════════════════════════════════════════════════════════
+function renderHero(show){
+  const hz=document.getElementById('hero-zone');
+  if(!show){hz.innerHTML='';return}
+  const active=D.rounds.find(r=>r.status==='active');
+  const done=doneRounds().length;
+  hz.innerHTML=`<div id="hero"><div class="hero-body">
+    <span class="bf">🦋</span>
+    <div class="ht">${D.tournament.name}</div>
+    ${D.tournament.subtitle?`<div class="hs">${D.tournament.subtitle}</div>`:''}
+    <div class="hmeta">
+      <span class="hpill">📍 ${D.tournament.location}</span>
+      <span class="hpill">🗓 ${D.tournament.date}</span>
+      <span class="hpill">🎤 ${D.tournament.format}</span>
+      <span class="hpill">📋 ${done}/${D.tournament.totalRounds} Rondas</span>
+      ${active?`<span class="hpill" style="background:rgba(234,88,12,.4);border-color:rgba(255,255,255,.5)">🔥 ${active.name} en curso</span>`:''}
+    </div>
+    <div class="hlinks">
+      <button class="hl hl-p" onclick="nav('team-tab')">📊 Tabla General</button>
+      <button class="hl hl-s" onclick="nav('round-results')">📋 Resultados</button>
+      <button class="hl hl-s" onclick="nav('break-open')">🏆 Break</button>
+      <button class="hl hl-s" onclick="nav('bracket')">🗂 Eliminatorias</button>
+    </div>
+  </div>
+  <div class="sstrip"><div class="sstrip-i">
+    <div class="sc"><div class="scn">${D.teams.length}</div><div class="scl">Equipos</div></div>
+    <div class="sc"><div class="scn">${D.adjudicators.length}</div><div class="scl">Jueces</div></div>
+    <div class="sc"><div class="scn">${D.institutions.length}</div><div class="scl">Instituciones</div></div>
+    <div class="sc"><div class="scn">${done}</div><div class="scl">Rondas</div></div>
+    <div class="sc"><div class="scn">${tDebates()}</div><div class="scl">Debates</div></div>
+    <div class="sc"><div class="scn">${ciCount()}</div><div class="scl">Check-In</div></div>
+  </div></div></div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  PUBLIC VIEWS
+// ═══════════════════════════════════════════════════════════
+function renderHome(){
+  const recent=doneRounds().slice(-2);
+  const top3=[...D.teams].sort((a,b)=>b.wins-a.wins||b.pts-a.pts).slice(0,3);
+  const topSpk=getSpeakers().slice(0,3);
+  return`<div class="page" style="padding-top:18px">
+  ${recent.map(r=>`<div class="card"><div class="ctsm">📋 ${r.name} — Resultados</div>
+  ${r.debates.map(d=>`<div class="di-card">
+    <div class="di-teams"><span class="di-team di-prop">${tn(d.prop)}</span><span class="di-vs">VS</span><span class="di-team di-opp">${tn(d.opp)}</span></div>
+    <div class="di-meta"><span>📍 ${d.room}</span>${d.winner?`<span class="di-winner">🏆 ${tn(d.winner)}</span>`:`<span class="di-pend">⏳ Pendiente</span>`}</div>
+    <div class="di-judges">${judgePanelHtml(d)}</div>
+  </div>`).join('')}</div>`).join('')}
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div class="card" style="margin-bottom:0"><div class="ctsm">🏆 Top 3 Equipos</div>
+    ${top3.map((t,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #fed7aa">
+      <span class="rk ${['rk1','rk2','rk3'][i]}">${i+1}</span>
+      <div><div style="font-weight:700;font-size:13px">${t.name}</div><div style="font-size:11px;color:#9a3412">${t.inst} · ${t.wins}V · ${t.pts}pts</div></div>
+    </div>`).join('')}</div>
+    <div class="card" style="margin-bottom:0"><div class="ctsm">🎤 Top 3 Oradores</div>
+    ${topSpk.map((s,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #fed7aa">
+      <span class="rk ${['rk1','rk2','rk3'][i]}">${i+1}</span>
+      <div><div style="font-weight:700;font-size:13px">${s.name}</div><div style="font-size:11px;color:#9a3412">${s.team} · ${s.pts}pts</div></div>
+    </div>`).join('')}</div>
+  </div>
+  ${D.tournament.tabDir?`<div class="card" style="margin-top:13px;text-align:center;padding:12px"><span class="badge bo">Tab: ${D.tournament.tabDir}</span> <span class="badge bb">WSDC</span></div>`:''}
+  </div>`;
+}
+
+function renderTeamTab(){
+  const sorted=[...D.teams].sort((a,b)=>b.wins-a.wins||b.pts-a.pts);
+  const maxW=Math.max(...sorted.map(t=>t.wins),1);
+  return`<div class="page"><div class="ph"><span class="ph-e">👯</span><div><div class="ph-t">Tab de Equipos</div><div class="ph-s">Formato WSDC · Proposición / Oposición · ${sorted.length} equipos</div></div></div>
+  <div class="card"><div class="tw"><table>
+    <thead><tr><th>#</th><th>Equipo</th><th>Institución</th><th>Cat</th><th>Victorias</th><th class="num">Pts Total</th><th class="num">Pts Oradores</th><th class="num">Réplica</th></tr></thead>
+    <tbody>${sorted.map((t,i)=>`<tr>
+      <td><span class="rk ${i===0?'rk1':i===1?'rk2':i===2?'rk3':'rkn'}">${i+1}</span></td>
+      <td><div style="font-weight:700">${t.name}</div><div style="font-size:11px;color:#9a3412">${t.s1} · ${t.s2} · ${t.s3}</div></td>
+      <td><span class="badge bo">${t.inst}</span></td>
+      <td><span class="badge ${t.cat==='open'?'bg':t.cat==='novice'?'bb':'bp'}">${t.cat}</span>${t.esl?` <span class="badge byel">ESL</span>`:''}</td>
+      <td><strong>${t.wins}</strong> <div style="height:5px;border-radius:3px;background:#fed7aa;margin-top:3px;width:60px"><div style="height:100%;background:var(--o);width:${Math.round(t.wins/maxW*100)}%;border-radius:3px"></div></div></td>
+      <td class="num"><strong>${t.pts}</strong></td>
+      <td class="num">${t.spk}</td>
+      <td class="num">${t.reply}</td>
+    </tr>`).join('')}</tbody>
+  </table></div></div></div>`;
+}
+
+function renderSpeakerTab(){
+  const spks=getSpeakers();
+  return`<div class="page"><div class="ph"><span class="ph-e">🎤</span><div><div class="ph-t">Tab de Oradores</div><div class="ph-s">${spks.length} oradores · WSDC scoring (60–80)</div></div></div>
+  <div class="card"><div class="tw"><table>
+    <thead><tr><th>#</th><th>Orador/a</th><th>Equipo</th><th>Institución</th><th class="num">Total</th><th class="num">Rondas</th><th class="num">Promedio</th></tr></thead>
+    <tbody>${spks.map((s,i)=>`<tr>
+      <td><span class="rk ${i===0?'rk1':i===1?'rk2':i===2?'rk3':'rkn'}">${i+1}</span></td>
+      <td><strong>${s.name}</strong></td>
+      <td><span class="badge bo">${s.team}</span></td>
+      <td style="font-size:11px">${s.inst}</td>
+      <td class="num"><strong>${s.pts}</strong></td>
+      <td class="num">${s.rounds}</td>
+      <td class="num">${s.rounds?(s.pts/s.rounds).toFixed(1):'—'}</td>
+    </tr>`).join('')}</tbody>
+  </table></div></div></div>`;
+}
+
+function renderRepliesTab(){
+  const reps=getReplies();
+  return`<div class="page"><div class="ph"><span class="ph-e">💬</span><div><div class="ph-t">Tab de Réplicas</div><div class="ph-s">WSDC Reply Speech (30–40 puntos)</div></div></div>
+  <div class="card"><div class="tw"><table>
+    <thead><tr><th>#</th><th>Orador/a</th><th>Equipo</th><th>Institución</th><th class="num">Total</th><th class="num">Rondas</th><th class="num">Prom.</th></tr></thead>
+    <tbody>${reps.map((s,i)=>`<tr>
+      <td><span class="rk ${i===0?'rk1':i===1?'rk2':i===2?'rk3':'rkn'}">${i+1}</span></td>
+      <td><strong>${s.name}</strong></td>
+      <td><span class="badge bo">${s.team}</span></td>
+      <td style="font-size:11px">${s.inst}</td>
+      <td class="num"><strong>${s.pts}</strong></td>
+      <td class="num">${s.rounds}</td>
+      <td class="num">${s.rounds?(s.pts/s.rounds).toFixed(1):'—'}</td>
+    </tr>`).join('')}</tbody>
+  </table></div></div></div>`;
+}
+
+function renderMotions(){
+  const rounds=D.rounds.filter(r=>r.motion&&(r.published||D.role==='admin'));
+  return`<div class="page"><div class="ph"><span class="ph-e">📜</span><div><div class="ph-t">Mociones</div><div class="ph-s">${rounds.length} mociones · Estadísticas Prop/Opp</div></div></div>
+  ${rounds.map(r=>{
+    const dbs=r.debates.filter(d=>d.winner);
+    const propW=dbs.filter(d=>d.winner===d.prop).length;
+    const oppW=dbs.filter(d=>d.winner===d.opp).length;
+    const tot=propW+oppW;
+    const pp=pct(propW,oppW);
+    return`<div class="motion-card">
+      <div class="mr">${r.name} <span class="rp ${r.status==='done'?'rp-done':r.status==='active'?'rp-act':'rp-pend'}">${r.status}</span></div>
+      <div class="mt">"${r.motion}"</div>
+      ${tot>0?`<div class="mb-wrap">
+        <span style="font-size:11px;font-weight:700;color:#14532d">Prop ${pp}%</span>
+        <div class="mb"><div class="mb-p" style="width:${pp}%"></div></div>
+        <span style="font-size:11px;font-weight:700;color:#1d4ed8">Opp ${100-pp}%</span>
+        <span style="font-size:10px;color:#9a3412">${tot} debate${tot!==1?'s':''}</span>
+      </div>`:`<div style="font-size:11px;color:#9a3412">Sin resultados aún</div>`}
+    </div>`;
+  }).join('')}
+  ${!rounds.length?`<div class="card" style="text-align:center;padding:40px;color:#9a3412">No hay mociones publicadas.</div>`:''}
+  </div>`;
+}
+
+function renderCheckin(){
+  const done=ciCount(),tot=totalPpl(),p2=Math.round(done/tot*100);
+  return`<div class="page"><div class="ph"><span class="ph-e">✅</span><div><div class="ph-t">Check-In</div><div class="ph-s">${done}/${tot} personas</div></div></div>
+  <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+    <div style="font-weight:700">Progreso</div>
+    <div style="font-family:var(--fd);font-size:24px;color:var(--o)">${p2}%</div>
+  </div>
+  <div class="ci-bar"><div class="ci-fill" style="width:${p2}%"></div></div>
+  <div style="font-size:12px;color:#9a3412">${done} confirmados · ${tot-done} pendientes</div></div>
+  <div class="card"><div class="ct">Equipos</div>
+  ${D.teams.map(t=>`<div class="ci-row">
+    <div><div style="font-weight:600">${t.name}</div><div style="font-size:11px;color:#9a3412">${t.inst} · ${t.s1}, ${t.s2}, ${t.s3}</div></div>
+    <div style="display:flex;align-items:center;gap:8px">
+      ${t.ci?`<span class="badge bg">✓ Registrado</span>`:`<span class="badge br">Pendiente</span>`}
+      ${D.role==='admin'?`<button class="${t.ci?'ci-unchk':'ci-chk'}" onclick="tCI('team','${t.id}')">${t.ci?'Retirar':'Confirmar'}</button>`:''}
+    </div>
+  </div>`).join('')}</div>
+  <div class="card"><div class="ct">Jueces</div>
+  ${D.adjudicators.map(a=>`<div class="ci-row">
+    <div><div style="font-weight:600">${a.name}</div><div style="font-size:11px;color:#9a3412">${a.inst} · ${starsH(a.score)}</div></div>
+    <div style="display:flex;align-items:center;gap:8px">
+      ${a.ci?`<span class="badge bg">✓ Registrado</span>`:`<span class="badge br">Pendiente</span>`}
+      ${D.role==='admin'?`<button class="${a.ci?'ci-unchk':'ci-chk'}" onclick="tCI('adj','${a.id}')">${a.ci?'Retirar':'Confirmar'}</button>`:''}
+    </div>
+  </div>`).join('')}</div></div>`;
+}
+function tCI(type,id){
+  if(type==='team'){const t=getTeam(id);if(t)t.ci=!t.ci}
+  else{const a=getAdj(id);if(a)a.ci=!a.ci}
+  toast('Check-in actualizado');render();
+}
+
+function renderRoundResults(){
+  var allR = D.role==='admin' ? D.rounds : D.rounds.filter(function(r){return r.published;});
+  if(!allR.length){
+    return '<div class="page"><div class="ph"><span class="ph-e">📋</span><div><div class="ph-t">Resultados</div></div></div><div class="card" style="text-align:center;padding:40px;color:#9a3412">Los resultados se publicarán pronto. Vuelve cuando el administrador publique una ronda.</div></div>';
+  }
+  if(!allR.find(function(r){return r.id===D.iTab;})) D.iTab = allR[0].id;
+  var round = getRound(D.iTab) || allR[0];
+  if(!round) return '';
+
+  // Build tab pills
+  var tabs = allR.map(function(r){
+    var active = (D.iTab===r.id) ? ' active' : '';
+    return '<button class="itab'+active+'" onclick="D.iTab=\''+r.id+'\';render()">'+r.name+'</button>';
+  }).join('');
+
+  // Build debate cards
+  var debateCards = '';
+  if(round.debates.length){
+    round.debates.forEach(function(d){
+      var propName = tn(d.prop);
+      var oppName  = tn(d.opp);
+      var panel    = judgePanelHtml(d);
+      var scoreInfo = '';
+      if(d.winner && d.propScores && d.propScores.s1){
+        scoreInfo = '<span style="font-size:10px;color:#14532d;margin-left:6px">PROP '+teamTot(d,'prop')+'pts</span>'
+                  + '<span style="font-size:10px;color:#7f1d1d;margin-left:4px">OPP '+teamTot(d,'opp')+'pts</span>';
+        if(d.split) scoreInfo += ' <span class="badge byel">Split</span>';
+      }
+      var resultBadge = d.winner
+        ? ('<span class="di-winner">🏆 '+tn(d.winner)+'</span>'+scoreInfo)
+        : '<span class="di-pend">⏳ Pendiente</span>';
+
+      debateCards += '<div class="di-card">'
+        + '<div class="di-teams">'
+        + '<span class="di-team di-prop">'+propName+' <span class="badge b-prop" style="font-size:9px">Proposición</span></span>'
+        + '<span class="di-vs">VS</span>'
+        + '<span class="di-team di-opp">'+oppName+' <span class="badge b-opp" style="font-size:9px">Oposición</span></span>'
+        + '</div>'
+        + '<div class="di-meta"><span>📍 '+d.room+'</span> '+resultBadge+'</div>'
+        + '<div class="di-judges" style="margin-top:5px">'+panel+'</div>'
+        + '</div>';
+    });
+  } else {
+    debateCards = '<div style="text-align:center;padding:28px;color:#9a3412">Draw no generado aún.</div>';
+  }
+
+  // Status pill
+  var statusClass = round.status==='done'?'rp-done':round.status==='active'?'rp-act':round.published?'rp-pub':'rp-pend';
+  var statusLabel = round.type!=='prelim' ? 'Eliminatoria' : round.status;
+
+  // Motion block
+  var motionBlock = round.motion
+    ? '<div class="motion-card" style="margin-bottom:14px"><div class="mr">Moción</div><div class="mt">"'+round.motion+'"</div></div>'
+    : '';
+
+  var elimBadge = round.type!=='prelim'
+    ? '<span class="rp rp-elim">'+round.type+'</span>'
+    : '';
+
+  return '<div class="page">'
+    + '<div class="ph"><span class="ph-e">📋</span><div><div class="ph-t">Resultados</div><div class="ph-s">Formato WSDC · Proposición / Oposición</div></div></div>'
+    + '<div class="itabs">'+tabs+'</div>'
+    + '<div class="card">'
+    + '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap">'
+    + '<div class="ct" style="margin-bottom:0">'+round.name+'</div>'
+    + '<span class="rp '+statusClass+'">'+statusLabel+'</span>'
+    + elimBadge
+    + (round.published ? ' <span class="badge bg" style="font-size:10px">🌐 Publicado</span>' : '')
+    + '</div>'
+    + motionBlock
+    + debateCards
+    + '</div></div>';
+}
+
+
+function renderBreakView(cat){
+  cat = cat || 'open';
+  var labels = {open:'Abierto', esl:'ESL', nov:'Novatos'};
+  var label = labels[cat] || cat;
+
+  var filtered;
+  if(cat==='esl')       filtered = D.teams.filter(function(t){return t.esl;});
+  else if(cat==='nov')  filtered = D.teams.filter(function(t){return t.nov;});
+  else                  filtered = D.teams.slice();
+
+  var sorted = filtered.sort(function(a,b){ return b.wins-a.wins || b.pts-a.pts; });
+  var breaking = sorted.filter(function(t){ return t.wins>=2; });
+  var list = (breaking.length>=2) ? breaking : sorted;
+  var isDef = breaking.length>=2;
+
+  var catBtns = ''
+    + '<button class="btn bsm '+(cat==='open'?'bo-btn':'br-btn')+'" onclick="nav(\'break-open\')">Abierto</button> '
+    + '<button class="btn bsm '+(cat==='esl'?'bo-btn':'br-btn')+'" onclick="nav(\'break-esl\')">ESL</button> '
+    + '<button class="btn bsm '+(cat==='nov'?'bo-btn':'br-btn')+'" onclick="nav(\'break-nov\')">Novatos</button> '
+    + '<button class="btn bsm br-btn" onclick="nav(\'break-adjs\')">Jueces</button>';
+
+  var warning = isDef ? '' : '<div class="alert al-info" style="margin-bottom:12px">Clasificación provisional. El break definitivo se confirma al concluir las rondas preliminares.</div>';
+
+  var items = '';
+  if(list.length === 0){
+    items = '<div style="text-align:center;padding:32px;color:#9a3412">Sin equipos en esta categoría aún.</div>';
+  } else {
+    list.forEach(function(t, i){
+      items += '<div class="brk-item">'
+        + '<span class="brk-pos">'+(i+1)+'</span>'
+        + '<div style="flex:1">'
+        + '<div style="font-weight:700;font-size:14px">'+t.name+' <span class="badge bbrk">BREAK</span></div>'
+        + '<div style="font-size:11px;color:#9a3412">'+t.inst+' · '+t.wins+'V · '+t.pts+'pts · ORA: '+t.spk+'</div>'
+        + '</div>'
+        + '<span style="font-size:11px;color:#9a3412">'+t.s1+' · '+t.s2+'</span>'
+        + '</div>';
+    });
+  }
+
+  return '<div class="page">'
+    + '<div class="ph"><span class="ph-e">🏆</span><div><div class="ph-t">Break — '+label+'</div><div class="ph-s">'+list.length+' equipo'+(list.length!==1?'s':'')+'</div></div></div>'
+    + '<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">'+catBtns+'</div>'
+    + '<div class="card">'
+    + '<div class="ct">'+(isDef?'Equipos clasificados — Eliminatorias':'Clasificación provisional')+'</div>'
+    + warning
+    + items
+    + '</div></div>';
+}
+
+
+function renderBreakAdjs(){
+  var adjs = getBreakAdjs();
+  var items = '';
+  if(adjs.length){
+    adjs.forEach(function(a, i){
+      items += '<div class="brk-item">'
+        + '<span class="brk-pos">'+(i+1)+'</span>'
+        + '<div style="flex:1">'
+        + '<div style="font-weight:700;font-size:14px">'+a.name+' <span class="badge bbrk">BREAK</span></div>'
+        + '<div style="font-size:11px;color:#9a3412">'+a.inst+'</div>'
+        + '</div>'
+        + '<span style="color:var(--o)">'+starsH(a.score)+'</span>'
+        + '</div>';
+    });
+  } else {
+    items = '<div style="text-align:center;padding:32px;color:#9a3412">Sin jueces con break asignados aún.</div>';
+  }
+  return '<div class="page">'
+    + '<div class="ph"><span class="ph-e">⚖</span><div><div class="ph-t">Jueces con Break</div></div></div>'
+    + '<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">'
+    + '<button class="btn bsm br-btn" onclick="nav(\'break-open\')">Equipos</button>'
+    + '<button class="btn bsm bo-btn">Jueces</button>'
+    + '</div>'
+    + '<div class="card">'+items+'</div></div>';
+}
+
+
+function renderBracket(){
+  const elimRounds=D.rounds.filter(r=>r.type!=='prelim');
+  return`<div class="page"><div class="ph"><span class="ph-e">🗂</span><div><div class="ph-t">Bracket Eliminatorias</div><div class="ph-s">WSDC · Octavos → Cuartos → Semifinal → Gran Final</div></div></div>
+  <div class="card">
+    <div class="bracket-wrap"><div class="bracket">
+      ${elimRounds.map(r=>{
+        const isActive=r.status==='active'||r.status==='done';
+        return`<div class="bracket-col">
+          <div class="bracket-col-title">${r.name}</div>
+          ${r.debates.length?r.debates.map(d=>`<div class="bracket-match ${d.winner?'winner-set':''}">
+            <div class="bm-team ${d.winner===d.prop?'bm-win':d.winner?'bm-loss':'bm-tbd'}">
+              ${d.prop?tn(d.prop):'TBD'}<span class="bm-pts">${d.propScores&&d.propScores.s1?teamTot(d,'prop'):''}</span>
+            </div>
+            <div style="font-size:9px;text-align:center;color:#9a3412;padding:2px 0">vs</div>
+            <div class="bm-team ${d.winner===d.opp?'bm-win':d.winner?'bm-loss':'bm-tbd'}">
+              ${d.opp?tn(d.opp):'TBD'}<span class="bm-pts">${d.oppScores&&d.oppScores.s1?teamTot(d,'opp'):''}</span>
+            </div>
+          </div>`).join(''):`<div class="bracket-match">
+            <div class="bm-team bm-tbd">TBD</div>
+            <div style="font-size:9px;text-align:center;color:#9a3412;padding:2px 0">vs</div>
+            <div class="bm-team bm-tbd">TBD</div>
+          </div>`}
+        </div>`;
+      }).join('')}
+    </div></div>
+    ${elimRounds.every(r=>!r.debates.length)?`<div style="text-align:center;padding:20px;color:#9a3412;font-size:13px">El bracket se genera en el panel de administrador tras las rondas preliminares.</div>`:''}
+  </div></div>`;
+}
+
+function renderParticipants(){
+  return`<div class="page"><div class="ph"><span class="ph-e">👤</span><div><div class="ph-t">Participantes</div><div class="ph-s">${D.teams.length*3+D.adjudicators.length} personas</div></div></div>
+  <div class="card"><div class="ct">Equipos (${D.teams.length})</div>
+  <div class="tw"><table>
+    <thead><tr><th>Orador/a</th><th>Equipo</th><th>Institución</th><th>Rol</th><th>Cat</th><th>CI</th></tr></thead>
+    <tbody>${D.teams.flatMap(t=>[
+      {nm:t.s1,team:t.name,inst:t.inst,rol:'1er Orador',cat:t.cat,ci:t.ci,esl:t.esl},
+      {nm:t.s2,team:t.name,inst:t.inst,rol:'2do Orador',cat:t.cat,ci:t.ci,esl:t.esl},
+      {nm:t.s3,team:t.name,inst:t.inst,rol:'3er Orador / Réplica',cat:t.cat,ci:t.ci,esl:t.esl},
+    ]).map(p=>`<tr>
+      <td><strong>${p.nm}</strong></td>
+      <td><span class="badge bo">${p.team}</span></td>
+      <td style="font-size:11px">${p.inst}</td>
+      <td style="font-size:11px">${p.rol}</td>
+      <td><span class="badge ${p.cat==='open'?'bg':'bb'}">${p.cat}</span>${p.esl?' <span class="badge byel">ESL</span>':''}</td>
+      <td><span style="color:${p.ci?'var(--grn)':'#9ca3af'}">${p.ci?'✓':'○'}</span></td>
+    </tr>`).join('')}</tbody>
+  </table></div></div>
+  <div class="card"><div class="ct">Panel de Jueces (${D.adjudicators.length})</div>
+  <div class="tw"><table>
+    <thead><tr><th>Nombre</th><th>Institución</th><th>Score</th><th>Break</th><th>CI</th></tr></thead>
+    <tbody>${D.adjudicators.map(a=>`<tr>
+      <td><strong>${a.name}</strong></td>
+      <td style="font-size:11px">${a.inst}</td>
+      <td><span style="color:var(--o)">${starsH(a.score)}</span></td>
+      <td>${a.breaking?`<span class="badge bbrk">BREAK</span>`:`<span class="badge bk">No</span>`}</td>
+      <td><span style="color:${a.ci?'var(--grn)':'#9ca3af'}">${a.ci?'✓':'○'}</span></td>
+    </tr>`).join('')}</tbody>
+  </table></div></div></div>`;
+}
+
+function renderInstitutions(){
+  return`<div class="page"><div class="ph"><span class="ph-e">🏛</span><div><div class="ph-t">Instituciones</div><div class="ph-s">${D.institutions.length} instituciones</div></div></div>
+  ${D.institutions.map(inst=>{
+    const teams=inst.teams.map(id=>getTeam(id)).filter(Boolean);
+    const adjs=inst.adjs.map(id=>getAdj(id)).filter(Boolean);
+    return`<div class="card">
+      <div class="ct">${inst.name}</div>
+      ${teams.length?`<div class="sec">Equipos</div><div class="tw"><table>
+        <thead><tr><th>Equipo</th><th>Victorias</th><th>Pts</th><th>Oradores</th></tr></thead>
+        <tbody>${teams.map(t=>`<tr>
+          <td><strong>${t.name}</strong></td><td><strong>${t.wins}</strong></td><td>${t.pts}</td>
+          <td style="font-size:11px">${t.s1} · ${t.s2} · ${t.s3}</td>
+        </tr>`).join('')}</tbody>
+      </table></div>`:''}
+      ${adjs.length?`<div class="sec">Jueces</div>${adjs.map(a=>`<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--ol)">
+        <strong style="font-size:13px">${a.name}</strong>
+        <span style="color:var(--o);font-size:12px">${starsH(a.score)}</span>
+        ${a.breaking?`<span class="badge bbrk">BREAK</span>`:''}
+      </div>`).join('')}`:''}
+    </div>`;
+  }).join('')}</div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  LOGIN
+// ═══════════════════════════════════════════════════════════
+function renderLogin(){
+  return`<div class="page-sm" style="padding-top:36px">
+  <div class="login-card">
+    <div class="login-logo"><span class="lbf">🦋</span><h1>INICIAR SESIÓN</h1><p>WSDC · SISTEMA DE TABULACIÓN</p></div>
+    ${D.alert?`<div class="alert al-${D.alert.t}">${D.alert.m}</div>`:''}
+    <label class="fl">Usuario / Token privado</label>
+    <input type="text" id="lu" value="${D.lU}" placeholder="admin ó token-privado" oninput="D.lU=this.value" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <label class="fl">Contraseña</label>
+    <input type="password" id="lp" value="${D.lP}" placeholder="••••••••" oninput="D.lP=this.value" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button class="btn bo-btn btn-full" onclick="doLogin()">Entrar →</button>
+    <div style="text-align:center;margin-top:10px"><button class="btn br-btn bsm" onclick="nav('home')">← Volver</button></div>
+  </div></div>`;
+}
+function doLogin(){
+  const u=D.lU.trim(),p=D.lP.trim();
+  if(chkA(u,p)){D.role='admin';D.token='admin';D.alert=null;nav('admin');return}
+  const part=getPartByToken(u);
+  if(part){D.role='participant';D.token=u;D.alert=null;nav('private');return}
+  D.alert={t:'err',m:'Credenciales incorrectas. Verifica tu usuario o token.'};render();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  PRIVATE PARTICIPANT VIEW + FEEDBACK
+// ═══════════════════════════════════════════════════════════
+const FB_ADJ=['Imparcialidad','Claridad del feedback','Profundidad del análisis','Puntualidad'];
+const FB_TEAM=['Argumentación','Refutación','Elocuencia','Estructura'];
+function renderPrivate(){
+  const part=getPartByToken(D.token);
+  if(!part)return`<div class="page-sm" style="padding-top:40px"><div class="card" style="text-align:center;padding:40px"><div style="font-size:40px">🔐</div><div style="color:var(--red);font-weight:700;margin-top:10px">Token inválido</div><button class="btn bo-btn bsm" style="margin-top:14px" onclick="nav('login')">← Login</button></div></div>`;
+  const isAdj=part.type==='juez';
+  const myD=[];
+  D.rounds.forEach(r=>r.debates.forEach(d=>{
+    if(isAdj&&d.panel&&(d.panel.chair===part.data.id||d.panel.panelists.includes(part.data.id)||d.panel.trainees.includes(part.data.id)))myD.push({round:r,debate:d});
+    if(!isAdj&&(d.prop===part.data.id||d.opp===part.data.id))myD.push({round:r,debate:d});
+  }));
+  const openD=myD.filter(({round:r})=>r.fbOpen);
+  return`<div class="page-md" style="padding-top:18px">
+  <div class="ph-header">
+    <span class="ph-role">${isAdj?'⚖ Juez':'🗣 Debatiente'}</span>
+    <div class="ph-name">${part.data.name}</div>
+    <div style="font-size:12px;color:var(--wh4);margin-top:3px">${part.data.inst}</div>
+    ${isAdj?`<div style="margin-top:5px">${starsH(part.data.score)}</div>`:`<div style="font-size:11px;color:var(--wh7);margin-top:3px">${part.data.s1} · ${part.data.s2} · ${part.data.s3}</div>`}
+  </div>
+  <div class="card">
+    <div class="ct">📋 Mis Debates</div>
+    ${myD.length?myD.map(({round:r,debate:d})=>{
+      const myRole=isAdj?(d.panel.chair===part.data.id?'Chair':d.panel.panelists.includes(part.data.id)?'Panelista':'Trainee'):d.prop===part.data.id?'Proposición':'Oposición';
+      return`<div class="di-card">
+        <div style="margin-bottom:5px"><span class="rp ${r.status==='done'?'rp-done':r.status==='active'?'rp-act':'rp-pub'}">${r.name}</span> <span class="badge ${isAdj?(myRole==='Chair'?'b-chair':myRole==='Panelista'?'b-panel':'b-train'):(myRole==='Proposición'?'b-prop':'b-opp')}">${myRole}</span></div>
+        <div class="di-teams"><span class="di-team di-prop">${tn(d.prop)}</span><span class="di-vs">VS</span><span class="di-team di-opp">${tn(d.opp)}</span></div>
+        <div class="di-meta"><span>📍 ${d.room}</span>${d.winner?`<span class="di-winner">🏆 ${tn(d.winner)}</span>`:`<span class="di-pend">⏳ Pendiente</span>`}</div>
+      </div>`;
+    }).join(''):`<div style="text-align:center;padding:22px;color:#9a3412">Sin debates asignados aún.</div>`}
+  </div>
+  <div class="card">
+    <div class="ct">💬 Feedback</div>
+    ${openD.length?openD.map(({round:r,debate:d})=>{
+      const targets=isAdj
+        ?[{id:d.prop,type:'equipo',lbl:'Proposición: '+tn(d.prop)},{id:d.opp,type:'equipo',lbl:'Oposición: '+tn(d.opp)}]
+        :[{id:d.panel.chair,type:'juez',lbl:'Chair: '+an(d.panel.chair)},...(d.panel.panelists||[]).map(id=>({id,type:'juez',lbl:'Panelista: '+an(id)}))];
+      return targets.filter(t=>t.id).map(tgt=>{
+        if(hasFB(d.id,D.token,tgt.id)){
+          const fb=(D.feedbacks[d.id]||[]).find(f=>f.from===D.token&&f.targetId===tgt.id);
+          return`<div class="di-card"><div style="font-weight:700;font-size:12px;margin-bottom:5px">${r.name} · ${tgt.lbl}</div><div class="alert al-ok">✓ Enviado · Score: <strong>${fb.score}/5</strong></div></div>`;
+        }
+        const criList=tgt.type==='juez'?FB_ADJ:FB_TEAM;
+        return`<div class="di-card" style="margin-bottom:10px">
+          <div style="font-weight:700;font-size:12px;color:var(--od);margin-bottom:8px">${r.name} · ${tgt.lbl}</div>
+          ${criList.map(c=>`<div class="fb-cri">
+            <div class="fb-cri-lbl">${c}</div>
+            <div id="fbs_${d.id}_${tgt.id}_${c.replace(/\s/g,'_')}">
+              ${[1,2,3,4,5].map(n=>`<span class="fb-star" onclick="setFBStar('${d.id}','${tgt.id}','${c.replace(/\s/g,'_')}',${n})">☆</span>`).join('')}
+            </div>
+          </div>`).join('')}
+          <label class="fl" style="margin-top:8px">Comentario (opcional)</label>
+          <textarea id="fbc_${d.id}_${tgt.id}" placeholder="Sé específico y constructivo..."></textarea>
+          <button class="btn bo-btn bsm" onclick="submitFB('${d.id}','${D.token}','${tgt.id}','${tgt.type}','${criList.join('|')}')">Enviar feedback 💬</button>
+        </div>`;
+      }).join('');
+    }).join(''):`<div class="alert al-info">🔒 Los formularios de feedback están cerrados. Se abrirán al finalizar cada ronda.</div>`}
+  </div>
+  <div style="text-align:center"><button class="btn br-btn bsm" onclick="nav('home')">← Inicio</button></div></div>`;
+}
+function setFBStar(dId,tId,cKey,val){
+  const el=document.getElementById(`fbs_${dId}_${tId}_${cKey}`);
+  if(!el)return;
+  el.querySelectorAll('.fb-star').forEach((s,i)=>{s.textContent=i<val?'★':'☆';s.classList.toggle('on',i<val)});
+  el.dataset.val=val;
+}
+function submitFB(dId,fromTok,tId,tType,criStr){
+  const criList=criStr.split('|');
+  const criteria={};let total=0;
+  criList.forEach(c=>{
+    const el=document.getElementById(`fbs_${dId}_${tId}_${c.replace(/\s/g,'_')}`);
+    const val=el?parseInt(el.dataset.val||0):1;
+    criteria[c]=Math.max(1,Math.min(5,isNaN(val)?1:val));
+    total+=criteria[c];
+  });
+  const score=Math.round(total/criList.length*10)/10;
+  const comment=(document.getElementById(`fbc_${dId}_${tId}`)?.value||'').trim();
+  if(!D.feedbacks[dId])D.feedbacks[dId]=[];
+  D.feedbacks[dId].push({id:gid(),from:fromTok,targetId:tId,targetType:tType,score,criteria,comment,ts:tnow()});
+  toast('💬 Feedback enviado — ¡Gracias!');render();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  ADMIN PANEL
+// ═══════════════════════════════════════════════════════════
+function renderAdmin(){
+  const tabs=[
+    {id:'dash',     lbl:'📊 Dashboard'},
+    {id:'teams',    lbl:'👥 Equipos'},
+    {id:'adjs',     lbl:'⚖ Jueces'},
+    {id:'rounds',   lbl:'📅 Rondas'},
+    {id:'draw',     lbl:'🎲 Draw'},
+    {id:'results',  lbl:'📋 Resultados'},
+    {id:'elim',     lbl:'🗂 Eliminatorias'},
+    {id:'motions',  lbl:'📜 Mociones'},
+    {id:'feedbacks',lbl:'💬 Feedbacks'},
+    {id:'urls',     lbl:'🔗 URLs'},
+    {id:'cfg',      lbl:'⚙ Config'},
+  ];
+  const bodies={
+    dash:adminDash, teams:adminTeams, adjs:adminAdjs,
+    rounds:adminRounds, draw:adminDraw, results:adminResults,
+    elim:adminElim, motions:adminMotions2,
+    feedbacks:adminFeedbacks, urls:adminURLs, cfg:adminCfg,
+  };
+  return`<div class="page" style="padding-top:18px">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="font-size:28px">🔐</span>
+      <div><div style="font-family:var(--fd);font-size:20px;letter-spacing:2px;color:#fff">PANEL ADMIN · WSDC</div>
+      <div style="font-size:11px;color:var(--wh4)">Acceso restringido · ${D.tournament.name}</div></div>
+    </div>
+    <div class="bgrp">
+      <button class="btn br-btn bsm" onclick="nav('home')">← Vista pública</button>
+      <button class="btn brd-btn bsm" onclick="logout()">Salir</button>
+    </div>
+  </div>
+  <div class="adm-nav">${tabs.map(t=>`<button class="an${D.aTab===t.id?' active':''}" onclick="D.aTab='${t.id}';D.iTab='r1';render()">${t.lbl}</button>`).join('')}</div>
+  ${(bodies[D.aTab]||adminDash)()}
+  </div>`;
+}
+
+// ── DASHBOARD ──────────────────────────────────────────────
+function adminDash(){
+  const active=D.rounds.find(r=>r.status==='active');
+  const fbCount=Object.values(D.feedbacks).flat().length;
+  const pubRounds=D.rounds.filter(r=>r.published);
+  return`
+  <div class="adm-stats">
+    <div class="as"><div class="as-n">${D.teams.length}</div><div class="as-l">Equipos</div></div>
+    <div class="as"><div class="as-n">${D.adjudicators.length}</div><div class="as-l">Jueces</div></div>
+    <div class="as"><div class="as-n">${doneRounds().length}</div><div class="as-l">Rondas</div></div>
+    <div class="as"><div class="as-n">${tDebates()}</div><div class="as-l">Debates</div></div>
+    <div class="as"><div class="as-n">${ciCount()}</div><div class="as-l">Check-In</div></div>
+    <div class="as"><div class="as-n">${pubRounds.length}</div><div class="as-l">Publicadas</div></div>
+    <div class="as"><div class="as-n">${fbCount}</div><div class="as-l">Feedbacks</div></div>
+  </div>
+  ${active?`<div class="cd" style="margin-bottom:12px">
+    <div class="ctw">🔥 Ronda Activa: ${active.name}</div>
+    <div class="bgrp">
+      <button class="btn bo-btn bsm" onclick="D.aTab='draw';D.iTab='${active.id}';render()">Ver Draw</button>
+      <button class="btn bg-btn bsm" onclick="D.aTab='results';D.iTab='${active.id}';render()">Ingresar Resultados</button>
+      ${active.fbOpen?`<button class="btn brd-btn bsm" onclick="setFBRound('${active.id}',false)">🔒 Cerrar FB</button>`:`<button class="btn bpur-btn bsm" onclick="setFBRound('${active.id}',true)">💬 Abrir FB</button>`}
+      <button class="btn bsm ${active.published?'brd-btn':'bg-btn'}" onclick="togglePub('${active.id}')">${active.published?'🚫 Despublicar':'🌐 Publicar Ronda'}</button>
+    </div>
+  </div>`:''}
+  <div class="cd">
+    <div class="ctw">📅 Estado de Rondas</div>
+    ${D.rounds.map(r=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bdr);flex-wrap:wrap;gap:6px">
+      <div>
+        <div style="color:#fff;font-weight:600">${r.name} <span class="rp ${r.type!=='prelim'?'rp-elim':'rp-pend'}">${r.type}</span></div>
+        <div style="font-size:11px;color:var(--wh4)">${r.debates.length} debate${r.debates.length!==1?'s':''} · ${r.motion?`"${r.motion.substr(0,40)}..."` :'Sin moción'}</div>
+      </div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center">
+        <span class="rp ${r.status==='done'?'rp-done':r.status==='active'?'rp-act':r.status==='pending'?'rp-pend':'rp-draw'}">${r.status}</span>
+        ${r.published?`<span class="badge bg">🌐 Publicado</span>`:`<span class="badge br">🔒 Privado</span>`}
+        ${r.fbOpen?`<span class="badge bp">FB Abierto</span>`:''}
+        <button class="btn bsm ${r.published?'brd-btn':'bg-btn'}" onclick="togglePub('${r.id}')">${r.published?'Despublicar':'Publicar'}</button>
+        <button class="btn bsm bo-btn" onclick="D.aTab='draw';D.iTab='${r.id}';render()">Draw</button>
+      </div>
+    </div>`).join('')}
+  </div>`;
+}
+
+function togglePub(rId){
+  const r=getRound(rId);if(!r)return;
+  r.published=!r.published;
+  toast(r.published?`🌐 ${r.name} publicada al público`:`🔒 ${r.name} despublicada`);
+  render();
+}
+function setFBRound(rId,open){
+  const r=getRound(rId);if(!r)return;
+  r.fbOpen=open;r.debates.forEach(d=>{if(d)d.fbOpen=open});
+  toast(open?`💬 Feedback abierto para ${r.name}`:`🔒 Feedback cerrado`);render();
+}
+function setRoundStatus(rId,s){const r=getRound(rId);if(r)r.status=s;toast('Estado → '+s);render()}
+
+// ── ROUNDS MANAGEMENT ──────────────────────────────────────
+function adminRounds(){
+  if(!D.iTab)D.iTab='r1';
+  return`<div class="card">
+    <div class="ct">📅 Gestión de Rondas</div>
+    <div class="alert al-info" style="margin-bottom:14px">Aquí controlas el estado, publicación y moción de cada ronda. "Publicar" hace que el draw y resultados sean visibles al público.</div>
+    ${D.rounds.map(r=>`<div style="border:1px solid var(--ol);border-radius:var(--r);padding:14px;margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+        <div>
+          <div style="font-weight:700;font-size:15px">${r.name} <span class="rp ${r.type!=='prelim'?'rp-elim':'rp-pend'}">${r.type}</span></div>
+          <div style="font-size:11px;color:#9a3412;margin-top:2px">${r.debates.length} debates generados</div>
+        </div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap">
+          <span class="rp ${r.status==='done'?'rp-done':r.status==='active'?'rp-act':r.status==='pending'?'rp-pend':'rp-draw'}">${r.status}</span>
+          ${r.published?`<span class="badge bg">🌐 Público</span>`:`<span class="badge br">🔒 Privado</span>`}
+        </div>
+      </div>
+      <div class="bgrp" style="margin-bottom:10px">
+        <button class="btn bsm ${r.published?'brd-btn':'bg-btn'}" onclick="togglePub('${r.id}')">${r.published?'🚫 Despublicar':'🌐 Publicar'}</button>
+        <button class="btn bsm bo-btn" onclick="D.aTab='draw';D.iTab='${r.id}';render()">⚡ Ir a Draw</button>
+        <button class="btn bsm bo-btn" onclick="D.aTab='results';D.iTab='${r.id}';render()">📋 Resultados</button>
+        ${r.fbOpen?`<button class="btn bsm brd-btn" onclick="setFBRound('${r.id}',false)">🔒 Cerrar FB</button>`:`<button class="btn bsm bpur-btn" onclick="setFBRound('${r.id}',true)">💬 Abrir FB</button>`}
+      </div>
+      <div class="fg" style="margin-bottom:8px">
+        <div>
+          <label class="fl">Estado</label>
+          <select style="margin-bottom:0" onchange="setRoundStatus('${r.id}',this.value)">
+            ${['pending','draw_generado','active','done'].map(s=>`<option value="${s}"${r.status===s?' selected':''}>${s}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label class="fl">Tipo de ronda</label>
+          <select style="margin-bottom:0" onchange="getRound('${r.id}').type=this.value;render()">
+            ${['prelim','octofinal','quarterfinal','semifinal','final'].map(s=>`<option value="${s}"${r.type===s?' selected':''}>${s}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <label class="fl">Moción</label>
+      <textarea id="mot_${r.id}" placeholder="Esta Sala Cree Que..." style="min-height:55px;margin-bottom:6px">${r.motion}</textarea>
+      <button class="btn bo-btn bsm" onclick="saveMotion2('${r.id}')">Guardar moción</button>
+    </div>`).join('')}
+  </div>`;
+}
+function saveMotion2(rId){const r=getRound(rId);if(r){r.motion=(document.getElementById('mot_'+rId)?.value||'').trim();}toast('✓ Moción guardada');render()}
+
+// ── TEAMS ─────────────────────────────────────────────────
+function adminTeams(){
+  return`<div class="card">
+    <div class="ct">👥 Gestión de Equipos</div>
+    <div class="sec">Agregar Equipo</div>
+    <div class="fg"><input id="nt_nm" placeholder="Nombre corto (ej: INA I)"/><input id="nt_full" placeholder="Nombre completo"/></div>
+    <div class="fg"><input id="nt_inst" placeholder="Institución"/><input id="nt_reg" placeholder="Región"/></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px">
+      <input id="nt_s1" placeholder="1er Orador/a"/>
+      <input id="nt_s2" placeholder="2do Orador/a"/>
+      <input id="nt_s3" placeholder="3er Orador/a"/>
+    </div>
+    <div class="fg" style="margin-bottom:8px">
+      <div><label class="fl">Categoría</label><select id="nt_cat"><option value="open">Abierto</option><option value="novice">Novato</option></select></div>
+      <div style="display:flex;gap:14px;align-items:center;padding-top:20px">
+        <label style="font-size:12px;font-weight:600;display:flex;align-items:center;gap:5px"><input type="checkbox" id="nt_esl"> ESL</label>
+        <label style="font-size:12px;font-weight:600;display:flex;align-items:center;gap:5px"><input type="checkbox" id="nt_nov"> Novato</label>
+      </div>
+    </div>
+    <button class="btn bo-btn bsm" onclick="addTeam()">+ Agregar Equipo</button>
+    <div class="sec" style="margin-top:20px">Equipos Registrados (${D.teams.length})</div>
+    <div class="tw"><table>
+      <thead><tr><th>Nombre</th><th>Institución</th><th>Oradores (1°/2°/3°)</th><th>Cat</th><th>V</th><th>Pts</th><th></th></tr></thead>
+      <tbody>${D.teams.map(t=>`<tr>
+        <td><strong>${t.name}</strong><br><span style="font-size:10px;color:#9a3412">${t.full}</span></td>
+        <td><span class="badge bo">${t.inst}</span></td>
+        <td style="font-size:11px">${t.s1} / ${t.s2} / ${t.s3}</td>
+        <td><span class="badge ${t.cat==='open'?'bg':'bb'}">${t.cat}</span>${t.esl?' <span class="badge byel">ESL</span>':''}</td>
+        <td><strong>${t.wins}</strong></td>
+        <td>${t.pts}</td>
+        <td><button class="btn brd-btn bxs" onclick="removeTeam('${t.id}')">✕</button></td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  </div>`;
+}
+function addTeam(){
+  const nm=v('nt_nm'),full=v('nt_full'),inst=v('nt_inst'),reg=v('nt_reg'),s1=v('nt_s1'),s2=v('nt_s2'),s3=v('nt_s3');
+  const cat=v('nt_cat');
+  const esl=document.getElementById('nt_esl')?.checked||false;
+  const nov=document.getElementById('nt_nov')?.checked||false;
+  if(!nm){toast('El nombre es obligatorio');return}
+  D.teams.push({id:gid(),name:nm,full:full||nm,inst:inst||'Sin institución',region:reg||'Nacional',cat,esl,nov,s1:s1||'Orador 1',s2:s2||'Orador 2',s3:s3||'Orador 3',wins:0,pts:0,spk:0,reply:0,token:gtok('tk'),ci:false});
+  toast('Equipo agregado ✓');render();
+}
+function removeTeam(id){D.teams=D.teams.filter(t=>t.id!==id);toast('Equipo eliminado');render()}
+
+// ── ADJUDICATORS ──────────────────────────────────────────
+function adminAdjs(){
+  return`<div class="card">
+    <div class="ct">⚖ Gestión de Jueces — WSDC Panel</div>
+    <div class="alert al-info" style="margin-bottom:12px"><strong>Roles WSDC:</strong> <span class="badge b-chair">Chair</span> preside y vota · <span class="badge b-panel">Panelista</span> vota · <span class="badge b-train">Trainee</span> observa, no vota</div>
+    <div class="sec">Agregar Juez</div>
+    <div class="fg"><input id="nj_nm" placeholder="Nombre del juez"/><input id="nj_inst" placeholder="Institución"/></div>
+    <div class="fg" style="margin-bottom:8px">
+      <div><label class="fl">Score (1-5)</label>
+        <select id="nj_sc"><option value="1">★ Novato</option><option value="2">★★ Básico</option><option value="3" selected>★★★ Competente</option><option value="4">★★★★ Experimentado</option><option value="5">★★★★★ Experto (CA)</option></select>
+      </div>
+      <div><label class="fl">Breaking</label>
+        <select id="nj_brk"><option value="0">No breaking</option><option value="1">Breaking</option></select>
+      </div>
+    </div>
+    <div style="margin-bottom:8px"><label class="fl">Conflictos de institución (nombres separados por coma)</label><input id="nj_conf" placeholder="CND Inquebrantable, Club Invitado"/></div>
+    <button class="btn bo-btn bsm" onclick="addAdj()">+ Agregar Juez</button>
+    <div class="sec" style="margin-top:20px">Jueces Registrados (${D.adjudicators.length})</div>
+    <div class="tw"><table>
+      <thead><tr><th>Nombre</th><th>Institución</th><th>Score</th><th>Break</th><th>Disponible</th><th>Conflictos</th><th></th></tr></thead>
+      <tbody>${D.adjudicators.map(a=>`<tr>
+        <td><strong>${a.name}</strong></td>
+        <td style="font-size:11px">${a.inst}</td>
+        <td><span style="color:var(--o)">${starsH(a.score)}</span></td>
+        <td><label><input type="checkbox" ${a.breaking?'checked':''} onchange="getAdj('${a.id}').breaking=this.checked;render()"> Break</label></td>
+        <td><label><input type="checkbox" ${a.avail?'checked':''} onchange="getAdj('${a.id}').avail=this.checked;render()"> Disponible</label></td>
+        <td style="font-size:11px">${(a.conflicts||[]).join(', ')||'—'}</td>
+        <td><button class="btn brd-btn bxs" onclick="removeAdj('${a.id}')">✕</button></td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  </div>`;
+}
+function addAdj(){
+  const nm=v('nj_nm'),inst=v('nj_inst'),sc=parseInt(v('nj_sc'))||3,brk=v('nj_brk')==='1';
+  const conf=v('nj_conf').split(',').map(x=>x.trim()).filter(Boolean);
+  if(!nm){toast('Nombre obligatorio');return}
+  D.adjudicators.push({id:gid(),name:nm,inst:inst||'Sin institución',score:sc,token:gtok('jdg'),avail:true,breaking:brk,ci:false,conflicts:conf});
+  toast('Juez agregado ✓');render();
+}
+function removeAdj(id){D.adjudicators=D.adjudicators.filter(a=>a.id!==id);toast('Juez eliminado');render()}
+
+// ── DRAW GENERATION + EDITOR ──────────────────────────────
+function adminDraw(){
+  const rounds=D.rounds;
+  if(!D.iTab||!getRound(D.iTab))D.iTab=rounds[0].id;
+  const round=getRound(D.iTab)||rounds[0];
+  return`<div class="card">
+    <div class="ct">🎲 Draw · ${round.name}</div>
+    <div class="itabs">${rounds.map(r=>`<button class="itab${D.iTab===r.id?' active':''}" onclick="D.iTab='${r.id}';D.drawEdit=null;render()">${r.name}</button>`).join('')}</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+      <div class="bgrp">
+        <button class="btn bo-btn bsm" onclick="genDraw('${round.id}')">⚡ Generar Draw</button>
+        <button class="btn bsm ${round.published?'brd-btn':'bg-btn'}" onclick="togglePub('${round.id}')">${round.published?'🚫 Despublicar':'🌐 Publicar'}</button>
+        ${round.fbOpen?`<button class="btn brd-btn bsm" onclick="setFBRound('${round.id}',false)">🔒 Cerrar FB</button>`:`<button class="btn bpur-btn bsm" onclick="setFBRound('${round.id}',true)">💬 Abrir FB</button>`}
+        <button class="btn bsm ${round.status==='active'?'brd-btn':'bo-btn'}" onclick="setRoundStatus('${round.id}','${round.status==='active'?'done':'active'}')">${round.status==='active'?'✓ Cerrar':'▶ Activar'}</button>
+      </div>
+      <div>
+        <span class="rp ${round.status==='done'?'rp-done':round.status==='active'?'rp-act':round.published?'rp-pub':'rp-pend'}">${round.status}</span>
+        ${round.published?` <span class="badge bg">🌐 Público</span>`:` <span class="badge br">🔒 Privado</span>`}
+      </div>
+    </div>
+    ${round.debates.length?`
+    <div class="sec">${round.debates.length} Debate${round.debates.length!==1?'s':''} — Haz clic en un debate para editar el panel de jueces</div>
+    ${round.debates.map(d=>renderDebateAdmin(round,d)).join('')}
+    `:`<div style="text-align:center;padding:32px;color:#9a3412">Presiona "Generar Draw" para crear los enfrentamientos automáticamente.</div>`}
+  </div>`;
+}
+
+function renderDebateAdmin(round,d){
+  const isEdit=D.drawEdit===d.id;
+  const avAdjs=D.adjudicators.filter(a=>a.avail);
+  return`<div class="di-card ${isEdit?'editing':''}">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:6px">
+      <div class="di-teams">
+        <span class="di-team di-prop">${tn(d.prop)} <span class="badge b-prop" style="font-size:9px">Proposición</span></span>
+        <span class="di-vs">VS</span>
+        <span class="di-team di-opp">${tn(d.opp)} <span class="badge b-opp" style="font-size:9px">Oposición</span></span>
+      </div>
+      <div class="bgrp">
+        <button class="btn bsm ${isEdit?'brd-btn':'br-btn'}" onclick="D.drawEdit=D.drawEdit==='${d.id}'?null:'${d.id}';render()">${isEdit?'✕ Cerrar':'✎ Editar Panel'}</button>
+        <button class="btn bsm bo-btn" onclick="swapSides('${round.id}','${d.id}')">⇄ Swap Prop/Opp</button>
+      </div>
+    </div>
+    <div class="di-meta"><span>📍 ${d.room}</span>${d.winner?`<span class="di-winner">🏆 ${tn(d.winner)}</span>`:`<span class="di-pend">⏳ Pendiente</span>`}</div>
+    <div class="di-judges" style="margin-top:6px">${judgePanelHtml(d)}</div>
+
+    ${isEdit?`<div style="border-top:1px dashed var(--o);margin-top:10px;padding-top:10px">
+      <div class="fg" style="margin-bottom:8px">
+        <div>
+          <label class="fl">📍 Sala</label>
+          <input id="room_${d.id}" value="${d.room}" style="margin-bottom:0" placeholder="Sala A" oninput="getRound('${round.id}').debates.find(x=>x.id==='${d.id}').room=this.value"/>
+        </div>
+        <div>
+          <label class="fl">⚖ Chair (preside + vota)</label>
+          <select id="chair_${d.id}" style="margin-bottom:0" onchange="setChair('${round.id}','${d.id}',this.value)">
+            <option value="">Sin chair</option>
+            ${avAdjs.map(a=>`<option value="${a.id}"${d.panel.chair===a.id?' selected':''}>${a.name} (${starsH(a.score,'☆').replace(/<[^>]+>/g,'')})</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <label class="fl">· Panelistas (votan) — seleccionar múltiples</label>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        ${avAdjs.filter(a=>a.id!==d.panel.chair).map(a=>{
+          const isPan=(d.panel.panelists||[]).includes(a.id);
+          const isTrn=(d.panel.trainees||[]).includes(a.id);
+          return`<button class="judge-chip ${isPan?'jc-panel':isTrn?'jc-train':'jc-remove'}" onclick="cycleJudge('${round.id}','${d.id}','${a.id}')">
+            ${isPan?'·':isTrn?'T':'+'}  ${a.name}
+          </button>`;
+        }).join('')}
+      </div>
+      <div style="font-size:11px;color:#9a3412;margin-bottom:6px">Clic en juez: <span class="badge b-panel">· Panelista</span> → <span class="badge b-train">T Trainee</span> → sin asignar</div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <label class="fl" style="margin-bottom:0">Split:</label>
+        <label style="font-size:12px;display:flex;align-items:center;gap:4px"><input type="checkbox" ${d.split?'checked':''} onchange="getRound('${round.id}').debates.find(x=>x.id==='${d.id}').split=this.checked"> Decisión dividida</label>
+      </div>
+    </div>`:''}
+  </div>`;
+}
+
+function setChair(rId,dId,adjId){
+  const round=getRound(rId);const deb=round.debates.find(d=>d.id===dId);if(!deb)return;
+  deb.panel.chair=adjId||null;
+  deb.panel.panelists=(deb.panel.panelists||[]).filter(id=>id!==adjId);
+  deb.panel.trainees=(deb.panel.trainees||[]).filter(id=>id!==adjId);
+  render();
+}
+function cycleJudge(rId,dId,adjId){
+  const round=getRound(rId);const deb=round.debates.find(d=>d.id===dId);if(!deb)return;
+  const pan=deb.panel.panelists||[];const trn=deb.panel.trainees||[];
+  if(pan.includes(adjId)){
+    deb.panel.panelists=pan.filter(x=>x!==adjId);
+    deb.panel.trainees=[...trn,adjId];
+  } else if(trn.includes(adjId)){
+    deb.panel.trainees=trn.filter(x=>x!==adjId);
+  } else {
+    deb.panel.panelists=[...pan,adjId];
+  }
+  render();
+}
+function swapSides(rId,dId){
+  const round=getRound(rId);const deb=round.debates.find(d=>d.id===dId);if(!deb)return;
+  [deb.prop,deb.opp]=[deb.opp,deb.prop];
+  [deb.propScores,deb.oppScores]=[deb.oppScores,deb.propScores];
+  if(deb.winner===deb.prop)deb.winner=deb.opp;
+  else if(deb.winner===deb.opp)deb.winner=deb.prop;
+  toast('⇄ Lados intercambiados');render();
+}
+
+function genDraw(rId){
+  const round=getRound(rId);if(!round){toast('Ronda no encontrada');return}
+  if(D.teams.length<2){toast('Se necesitan al menos 2 equipos');return}
+  const shuffled=[...D.teams].sort(()=>Math.random()-0.5);
+  const avAdjs=D.adjudicators.filter(a=>a.avail);
+  const debates=[];
+  for(let i=0;i<shuffled.length-1;i+=2){
+    const chair=avAdjs[Math.floor(i/2)%Math.max(avAdjs.length,1)];
+    debates.push({
+      id:gid(),prop:shuffled[i].id,opp:shuffled[i+1].id,
+      panel:{chair:chair?chair.id:null,panelists:[],trainees:[]},
+      room:'Sala '+(Math.ceil((i+2)/2)),winner:null,propScores:{},oppScores:{},split:false,
+    });
+  }
+  round.debates=debates;round.status='draw_generado';
+  toast('⚡ Draw generado — puedes editar cada debate');render();
+}
+
+// ── RESULTS ───────────────────────────────────────────────
+function adminResults(){
+  const rounds=D.rounds.filter(r=>r.debates.length>0);
+  if(!rounds.length)return`<div class="card"><div style="text-align:center;padding:32px;color:#9a3412">Genera un draw primero.</div></div>`;
+  if(!D.iTab||!rounds.find(r=>r.id===D.iTab))D.iTab=rounds[0].id;
+  const round=getRound(D.iTab)||rounds[0];
+  return`<div class="card">
+    <div class="ct">📋 Resultados — WSDC (S1+S2+S3+Réplica)</div>
+    <div class="alert al-info" style="margin-bottom:12px">Puntuaciones WSDC: Oradores 60–80 pts · Réplica 30–40 pts</div>
+    <div class="itabs">${rounds.map(r=>`<button class="itab${D.iTab===r.id?' active':''}" onclick="D.iTab='${r.id}';render()">${r.name}</button>`).join('')}</div>
+    ${round.debates.map(d=>`
+    <div class="di-card" style="margin-bottom:12px">
+      <div style="font-weight:700;font-size:12px;margin-bottom:7px">📍 ${d.room} · ${judgePanelHtml(d)}</div>
+      <div class="di-teams" style="margin-bottom:10px">
+        <span class="di-team di-prop">${tn(d.prop)} <span class="badge b-prop" style="font-size:9px">Proposición</span></span>
+        <span class="di-vs">VS</span>
+        <span class="di-team di-opp">${tn(d.opp)} <span class="badge b-opp" style="font-size:9px">Oposición</span></span>
+      </div>
+      ${d.winner?`<div class="alert al-ok">🏆 <strong>${tn(d.winner)}</strong> · PROP ${teamTot(d,'prop')}pts · OPP ${teamTot(d,'opp')}pts ${d.split?'· <span class="badge byel">Split</span>':''}</div>`:`
+      <div>
+        <div class="fg" style="margin-bottom:8px">
+          <div>
+            <label class="fl">Ganador</label>
+            <select id="win_${d.id}" style="margin-bottom:0">
+              <option value="">— Selecciona —</option>
+              <option value="${d.prop}">${tn(d.prop)} (Proposición)</option>
+              <option value="${d.opp}">${tn(d.opp)} (Oposición)</option>
+            </select>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding-top:18px">
+            <label style="font-size:12px;font-weight:600;display:flex;align-items:center;gap:4px"><input type="checkbox" id="spl_${d.id}"> Split</label>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+          <div>
+            <div style="font-weight:700;font-size:12px;color:#14532d;margin-bottom:6px">🟢 Proposición — ${tn(d.prop)}</div>
+            <div class="score-row"><span class="score-lbl">1er Orador</span><input class="score-in" type="number" id="ps1_${d.id}" min="60" max="80" placeholder="70"/></div>
+            <div class="score-row"><span class="score-lbl">2do Orador</span><input class="score-in" type="number" id="ps2_${d.id}" min="60" max="80" placeholder="70"/></div>
+            <div class="score-row"><span class="score-lbl">3er Orador</span><input class="score-in" type="number" id="ps3_${d.id}" min="60" max="80" placeholder="70"/></div>
+            <div class="score-row"><span class="score-lbl">Réplica</span><input class="score-in" type="number" id="pr_${d.id}" min="30" max="40" placeholder="35"/></div>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:12px;color:#7f1d1d;margin-bottom:6px">🔴 Oposición — ${tn(d.opp)}</div>
+            <div class="score-row"><span class="score-lbl">1er Orador</span><input class="score-in" type="number" id="os1_${d.id}" min="60" max="80" placeholder="70"/></div>
+            <div class="score-row"><span class="score-lbl">2do Orador</span><input class="score-in" type="number" id="os2_${d.id}" min="60" max="80" placeholder="70"/></div>
+            <div class="score-row"><span class="score-lbl">3er Orador</span><input class="score-in" type="number" id="os3_${d.id}" min="60" max="80" placeholder="70"/></div>
+            <div class="score-row"><span class="score-lbl">Réplica</span><input class="score-in" type="number" id="or_${d.id}" min="30" max="40" placeholder="35"/></div>
+          </div>
+        </div>
+        <div style="margin-top:10px"><button class="btn bg-btn bsm btn-full" onclick="saveResult('${round.id}','${d.id}')">✓ Guardar Resultado</button></div>
+      </div>`}
+    </div>`).join('')}
+  </div>`;
+}
+function saveResult(rId,dId){
+  const wEl=document.getElementById('win_'+dId);
+  if(!wEl||!wEl.value){toast('Selecciona un ganador');return}
+  const round=getRound(rId);const deb=round.debates.find(d=>d.id===dId);if(!deb)return;
+  const n=key=>parseInt(document.getElementById(key+dId)?.value)||0;
+  deb.winner=wEl.value;
+  deb.split=document.getElementById('spl_'+dId)?.checked||false;
+  deb.propScores={s1:n('ps1_'),s2:n('ps2_'),s3:n('ps3_'),reply:n('pr_')};
+  deb.oppScores= {s1:n('os1_'),s2:n('os2_'),s3:n('os3_'),reply:n('or_')};
+  const pt=getTeam(deb.prop),op=getTeam(deb.opp);
+  if(pt&&op){
+    const ps=deb.propScores,os=deb.oppScores;
+    pt.pts+=ps.s1+ps.s2+ps.s3+ps.reply;pt.spk+=ps.s1+ps.s2+ps.s3;pt.reply+=ps.reply;
+    op.pts+=os.s1+os.s2+os.s3+os.reply;op.spk+=os.s1+os.s2+os.s3;op.reply+=os.reply;
+    if(deb.winner===deb.prop)pt.wins+=1; else op.wins+=1;
+  }
+  round.status='done';
+  toast('✓ Resultado guardado');render();
+}
+
+// ── ELIMINATIONS ─────────────────────────────────────────
+function adminElim(){
+  const elimR=D.rounds.filter(r=>r.type!=='prelim');
+  const breakTeams=getBreakTeams();
+  if(!D.iTab||!elimR.find(r=>r.id===D.iTab))D.iTab=elimR[0]?.id||'r5';
+  const round=getRound(D.iTab)||elimR[0];
+  return`<div class="card">
+    <div class="ct">🗂 Eliminatorias WSDC</div>
+    <div class="alert al-info" style="margin-bottom:12px">
+      Equipos con break: ${breakTeams.map(t=>`<span class="badge bbrk" style="margin:1px">${t.name}</span>`).join(' ')||'Sin equipos aún'}
+    </div>
+    <div class="itabs">${elimR.map(r=>`<button class="itab${D.iTab===r.id?' active':''}" onclick="D.iTab='${r.id}';render()">${r.name}</button>`).join('')}</div>
+    ${round?`
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+      <span class="rp ${round.status==='done'?'rp-done':round.status==='active'?'rp-act':'rp-elim'}">${round.type}</span>
+      <div class="bgrp">
+        <button class="btn bo-btn bsm" onclick="genElimDraw('${round.id}')">⚡ Generar Draw</button>
+        <button class="btn bsm ${round.published?'brd-btn':'bg-btn'}" onclick="togglePub('${round.id}')">${round.published?'Despublicar':'🌐 Publicar'}</button>
+        <button class="btn bsm ${round.status==='active'?'brd-btn':'bo-btn'}" onclick="setRoundStatus('${round.id}','${round.status==='active'?'done':'active'}')">${round.status==='active'?'Cerrar':'▶ Activar'}</button>
+      </div>
+    </div>
+    <div>
+      ${round.debates.length?round.debates.map((d,i)=>`
+      <div class="di-card">
+        <div style="font-weight:700;font-size:12px;margin-bottom:6px">Debate ${i+1} · ${d.room}</div>
+        <div class="di-teams">
+          <span class="di-team di-prop">${d.prop?tn(d.prop):'TBD'}</span>
+          <span class="di-vs">VS</span>
+          <span class="di-team di-opp">${d.opp?tn(d.opp):'TBD'}</span>
+        </div>
+        <div class="di-meta">
+          ${d.winner?`<span class="di-winner">🏆 ${tn(d.winner)}</span>`:`<span class="di-pend">⏳ Pendiente</span>`}
+        </div>
+        <div class="di-judges">${judgePanelHtml(d)}</div>
+        ${!d.winner?`<div style="margin-top:8px">
+          <div class="fg" style="margin-bottom:6px">
+            <div>
+              <label class="fl">Proposición</label>
+              <select id="ep_${d.id}" style="margin-bottom:0">
+                ${breakTeams.map(t=>`<option value="${t.id}"${d.prop===t.id?' selected':''}>${t.name}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label class="fl">Oposición</label>
+              <select id="eo_${d.id}" style="margin-bottom:0">
+                ${breakTeams.map(t=>`<option value="${t.id}"${d.opp===t.id?' selected':''}>${t.name}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+          <div class="fg" style="margin-bottom:6px">
+            <div>
+              <label class="fl">Chair</label>
+              <select id="ej_${d.id}" style="margin-bottom:0">
+                <option value="">Sin chair</option>
+                ${D.adjudicators.map(a=>`<option value="${a.id}"${d.panel.chair===a.id?' selected':''}>${a.name}</option>`).join('')}
+              </select>
+            </div>
+            <div><label class="fl">Sala</label><input id="er_${d.id}" value="${d.room}" style="margin-bottom:0"/></div>
+          </div>
+          <div class="fg" style="margin-bottom:8px">
+            <div>
+              <label class="fl">Ganador</label>
+              <select id="ew_${d.id}" style="margin-bottom:0">
+                <option value="">— Selecciona —</option>
+                <option value="${d.prop||''}">Proposición</option>
+                <option value="${d.opp||''}">Oposición</option>
+              </select>
+            </div>
+            <div style="padding-top:18px"><button class="btn bg-btn bsm btn-full" onclick="saveElimResult('${round.id}','${d.id}')">Guardar</button></div>
+          </div>
+        </div>`:''}
+      </div>`).join(''):`<div style="text-align:center;padding:24px;color:#9a3412">Genera el draw para esta ronda eliminatoria.</div>`}
+    </div>`:'<div style="text-align:center;padding:24px;color:#9a3412">No hay rondas eliminatorias configuradas.</div>'}
+  </div>`;
+}
+
+function genElimDraw(rId){
+  const round=getRound(rId);if(!round)return;
+  const breakTeams=getBreakTeams();
+  if(breakTeams.length<2){toast('Se necesitan al menos 2 equipos con break');return}
+  const avAdjs=D.adjudicators.filter(a=>a.avail&&a.breaking);
+  const debates=[];
+  const shuffled=[...breakTeams].sort(()=>Math.random()-.5);
+  for(let i=0;i<shuffled.length-1;i+=2){
+    const chair=avAdjs[Math.floor(i/2)%Math.max(avAdjs.length,1)];
+    debates.push({id:gid(),prop:shuffled[i].id,opp:shuffled[i+1].id,
+      panel:{chair:chair?chair.id:null,panelists:[],trainees:[]},
+      room:'Sala EL-'+(i/2+1),winner:null,propScores:{},oppScores:{},split:false});
+  }
+  round.debates=debates;round.status='draw_generado';
+  toast('⚡ Draw eliminatorio generado');render();
+}
+function saveElimResult(rId,dId){
+  const wEl=document.getElementById('ew_'+dId);
+  if(!wEl||!wEl.value){toast('Selecciona ganador');return}
+  const round=getRound(rId);const deb=round.debates.find(d=>d.id===dId);if(!deb)return;
+  const pSel=document.getElementById('ep_'+dId)?.value;
+  const oSel=document.getElementById('eo_'+dId)?.value;
+  const jSel=document.getElementById('ej_'+dId)?.value;
+  const rSel=document.getElementById('er_'+dId)?.value;
+  if(pSel)deb.prop=pSel;if(oSel)deb.opp=oSel;
+  if(jSel)deb.panel.chair=jSel;if(rSel)deb.room=rSel;
+  deb.winner=wEl.value;
+  round.status='done';
+  toast('✓ Resultado eliminatorio guardado');render();
+}
+
+// ── MOTIONS ADMIN ──────────────────────────────────────────
+function adminMotions2(){
+  if(!D.iTab)D.iTab='r1';
+  return`<div class="card">
+    <div class="ct">📜 Gestión de Mociones</div>
+    <div class="itabs">${D.rounds.map(r=>`<button class="itab${D.iTab===r.id?' active':''}" onclick="D.iTab='${r.id}';render()">${r.name}</button>`).join('')}</div>
+    ${D.rounds.filter(r=>r.id===D.iTab).map(r=>`<div>
+      <label class="fl">Moción — ${r.name}</label>
+      <textarea id="admmot_${r.id}" placeholder="Esta Sala Cree Que / Esta Casa Apoyaría / Esta Casa Resolvería...">${r.motion}</textarea>
+      <div class="bgrp">
+        <button class="btn bo-btn bsm" onclick="saveMotAdm('${r.id}')">Guardar Moción</button>
+        ${r.published?`<span class="badge bg">Moción visible al público</span>`:`<span class="badge br">Moción privada</span>`}
+      </div>
+    </div>`).join('')}
+  </div>`;
+}
+function saveMotAdm(rId){const r=getRound(rId);if(r){r.motion=(document.getElementById('admmot_'+rId)?.value||'').trim();}toast('✓ Moción guardada');render()}
+
+// ── FEEDBACKS ADMIN ────────────────────────────────────────
+function adminFeedbacks(){
+  const allFB=Object.values(D.feedbacks).flat();
+  const adjFB=allFB.filter(f=>f.targetType==='juez');
+  const teamFB=allFB.filter(f=>f.targetType==='equipo');
+  if(!D.iTab||!['fb-j','fb-t'].includes(D.iTab))D.iTab='fb-j';
+  const list=D.iTab==='fb-j'?adjFB:teamFB;
+  return`<div class="card">
+    <div class="ct">💬 Feedbacks del Torneo</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+      <div class="as" style="min-width:90px;padding:10px"><div class="as-n" style="font-size:28px">${allFB.length}</div><div class="as-l">Total</div></div>
+      <div class="as" style="min-width:90px;padding:10px;border-color:#93c5fd"><div class="as-n" style="font-size:28px;color:#60a5fa">${adjFB.length}</div><div class="as-l">A Jueces</div></div>
+      <div class="as" style="min-width:90px;padding:10px;border-color:#86efac"><div class="as-n" style="font-size:28px;color:#4ade80">${teamFB.length}</div><div class="as-l">A Equipos</div></div>
+    </div>
+    <div class="itabs">
+      <button class="itab${D.iTab==='fb-j'?' active':''}" onclick="D.iTab='fb-j';render()">⚖ A Jueces</button>
+      <button class="itab${D.iTab==='fb-t'?' active':''}" onclick="D.iTab='fb-t';render()">🗣 A Equipos</button>
+    </div>
+    ${list.length?list.map(fb=>{
+      const target=fb.targetType==='juez'?getAdj(fb.targetId):getTeam(fb.targetId);
+      return`<div style="background:var(--op);border:1px solid var(--ol);border-radius:var(--r);padding:13px;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:7px">
+          <div><strong>${target?target.name:'Desconocido'}</strong> <span class="badge ${fb.targetType==='juez'?'b-chair':'bo'}">${fb.targetType}</span></div>
+          <div style="font-family:var(--fd);font-size:26px;color:var(--o);line-height:1">${fb.score}<span style="font-size:14px;color:#9a3412">/5</span></div>
+        </div>
+        <div style="color:var(--o);font-size:14px;margin-bottom:5px">${starsH(Math.round(fb.score))}</div>
+        ${Object.entries(fb.criteria).map(([k,val])=>`<div style="display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:1px solid var(--ol)">
+          <span>${k}</span><span style="color:var(--o)">${starsH(val)}</span>
+        </div>`).join('')}
+        ${fb.comment?`<div style="background:#fff;padding:7px;border-radius:6px;font-size:12px;color:#374151;margin-top:7px;font-style:italic">"${fb.comment}"</div>`:''}
+        <div style="font-size:10px;color:#9a3412;margin-top:5px">📅 ${fb.ts}</div>
+      </div>`;
+    }).join(''):`<div style="text-align:center;padding:28px;color:#9a3412">No hay feedbacks aún.</div>`}
+  </div>`;
+}
+
+// ── URLs PRIVADAS ─────────────────────────────────────────
+function adminURLs(){
+  return`<div class="card">
+    <div class="ct">🔗 URLs Privadas</div>
+    <div class="alert al-info">Comparte cada URL solo con su destinatario. El token da acceso únicamente a su panel y formulario de feedback.</div>
+    <div class="sec">Jueces (${D.adjudicators.length})</div>
+    ${D.adjudicators.map(a=>`<div style="padding:11px 0;border-bottom:1px solid var(--ol)">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px;margin-bottom:4px">
+        <div><strong>${a.name}</strong> <span class="badge b-chair">Juez</span> <span style="color:var(--o);font-size:12px">${starsH(a.score)}</span></div>
+        <span style="font-size:11px;color:#9a3412">${a.inst}</span>
+      </div>
+      <div class="url-box">${BASE}privado/${a.token}</div>
+      <div style="display:flex;gap:6px;margin-top:4px;align-items:center">
+        <button class="cpybtn" onclick="cpy('${BASE}privado/${a.token}')">📋 Copiar URL</button>
+        <span style="font-family:var(--fm);font-size:10px;color:#9a3412">${a.token}</span>
+      </div>
+    </div>`).join('')}
+    <div class="sec" style="margin-top:16px">Equipos (${D.teams.length})</div>
+    ${D.teams.map(t=>`<div style="padding:11px 0;border-bottom:1px solid var(--ol)">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px;margin-bottom:4px">
+        <div><strong>${t.name}</strong> <span class="badge bo">Equipo</span></div>
+        <span style="font-size:11px;color:#9a3412">${t.inst} · ${t.s1} · ${t.s2} · ${t.s3}</span>
+      </div>
+      <div class="url-box">${BASE}privado/${t.token}</div>
+      <div style="display:flex;gap:6px;margin-top:4px;align-items:center">
+        <button class="cpybtn" onclick="cpy('${BASE}privado/${t.token}')">📋 Copiar URL</button>
+        <span style="font-family:var(--fm);font-size:10px;color:#9a3412">${t.token}</span>
+      </div>
+    </div>`).join('')}
+  </div>`;
+}
+
+// ── CONFIG ────────────────────────────────────────────────
+function adminCfg(){
+  return`<div class="card">
+    <div class="ct">⚙ Configuración del Torneo</div>
+    <div class="fg"><div><label class="fl">Nombre del torneo</label><input id="cf_nm" value="${D.tournament.name}" oninput="D.tournament.name=this.value"/></div>
+    <div><label class="fl">Subtítulo</label><input id="cf_sb" value="${D.tournament.subtitle}" oninput="D.tournament.subtitle=this.value"/></div></div>
+    <div class="fg"><div><label class="fl">Ubicación</label><input id="cf_loc" value="${D.tournament.location}" oninput="D.tournament.location=this.value"/></div>
+    <div><label class="fl">Año</label><input id="cf_yr" value="${D.tournament.date}" oninput="D.tournament.date=this.value"/></div></div>
+    <div class="fg"><div><label class="fl">Formato</label>
+      <select onchange="D.tournament.format=this.value">
+        ${['WSDC','BP','Mace','Karl Popper','Oxford'].map(f=>`<option${D.tournament.format===f?' selected':''}>${f}</option>`).join('')}
+      </select></div>
+    <div><label class="fl">Director de Tabulación</label><input value="${D.tournament.tabDir}" oninput="D.tournament.tabDir=this.value"/></div></div>
+    <div class="fg"><div><label class="fl">Tamaño del Break</label><input type="number" value="${D.tournament.breakSize}" oninput="D.tournament.breakSize=parseInt(this.value)||8" min="4" max="32"/></div>
+    <div><label class="fl">Rondas Preliminares</label><input type="number" value="${D.tournament.totalRounds}" oninput="D.tournament.totalRounds=parseInt(this.value)||4" min="2" max="10"/></div></div>
+    <div style="display:flex;gap:14px;margin-bottom:14px;flex-wrap:wrap">
+      <label style="font-size:12px;font-weight:600;display:flex;align-items:center;gap:5px"><input type="checkbox" ${D.tournament.esl?'checked':''} onchange="D.tournament.esl=this.checked"> Categoría ESL</label>
+      <label style="font-size:12px;font-weight:600;display:flex;align-items:center;gap:5px"><input type="checkbox" ${D.tournament.novice?'checked':''} onchange="D.tournament.novice=this.checked"> Categoría Novatos</label>
+    </div>
+    <button class="btn bo-btn" onclick="toast('⚙ Configuración guardada ✓')">Guardar</button>
+
+    <div class="sec" style="margin-top:20px">Control Global de Rondas</div>
+    <div class="tw"><table>
+      <thead><tr><th>Ronda</th><th>Tipo</th><th>Estado</th><th>Publicado</th><th>Feedback</th><th>Acciones</th></tr></thead>
+      <tbody>${D.rounds.map(r=>`<tr>
+        <td><strong>${r.name}</strong></td>
+        <td><span class="rp ${r.type!=='prelim'?'rp-elim':'rp-pend'}">${r.type}</span></td>
+        <td>
+          <select style="width:120px;margin-bottom:0;font-size:11px;padding:4px 6px" onchange="setRoundStatus('${r.id}',this.value)">
+            ${['pending','draw_generado','active','done'].map(s=>`<option value="${s}"${r.status===s?' selected':''}>${s}</option>`).join('')}
+          </select>
+        </td>
+        <td><label style="cursor:pointer"><input type="checkbox" ${r.published?'checked':''} onchange="getRound('${r.id}').published=this.checked;render()"> Publicado</label></td>
+        <td><label style="cursor:pointer"><input type="checkbox" ${r.fbOpen?'checked':''} onchange="getRound('${r.id}').fbOpen=this.checked;render()"> Abierto</label></td>
+        <td><div class="bgrp">
+          <button class="btn bxs bo-btn" onclick="D.aTab='draw';D.iTab='${r.id}';render()">Draw</button>
+          <button class="btn bxs bo-btn" onclick="D.aTab='results';D.iTab='${r.id}';render()">Result</button>
+        </div></td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  MAIN RENDER
+// ═══════════════════════════════════════════════════════════
+function render(){
+  renderNav();
+  const isHome=D.view==='home';
+  renderHero(isHome);
+  const body=document.getElementById('app-body');
+  const views={
+    home:renderHome,
+    'team-tab':renderTeamTab,
+    'speaker-tab':renderSpeakerTab,
+    'replies-tab':renderRepliesTab,
+    motions:renderMotions,
+    checkin:renderCheckin,
+    'round-results':renderRoundResults,
+    'break-open':()=>renderBreakView('open'),
+    'break-esl':()=>renderBreakView('esl'),
+    'break-nov':()=>renderBreakView('nov'),
+    'break-adjs':renderBreakAdjs,
+    bracket:renderBracket,
+    participants:renderParticipants,
+    institutions:renderInstitutions,
+    login:renderLogin,
+    private:renderPrivate,
+    admin:()=>D.role==='admin'?renderAdmin():renderLogin(),
+  };
+  try{
+    body.innerHTML = (views[D.view]||renderHome)();
+  }catch(e){
+    console.error('View render error:', e);
+    body.innerHTML = '<div class="page"><div class="card" style="padding:30px;text-align:center;color:var(--red)"><strong>Error al cargar vista.</strong><br><span style="font-size:12px">'+e.message+'</span></div></div>';
+  }
+}
+
+render();
+</script>
+</body>
+</html>
